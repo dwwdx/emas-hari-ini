@@ -212,12 +212,11 @@
       const checked = new Date(data.checkedAt || data.lastUpdate);
       const observedTime = !Number.isNaN(checked.getTime()) ? checked.getTime() : Date.now();
       const sourceTime=validDate?new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(updated):'sebentar tadi';
-      const sourceName=data.source?` · ${data.source}`:'';
       state.lastChecked=Date.now();
       const delayed=sourceIsStale(data)||Boolean(data.servedFromCache)||fromDevice;
       $('lastUpdate').textContent=delayed
-        ? `Bacaan terakhir · sumber ${sourceTime}${sourceName}`
-        : `Sumber ${sourceTime}${sourceName} · disemak sekarang`;
+        ? `Bacaan terakhir · sumber ${sourceTime}`
+        : `Sumber ${sourceTime} · disemak sekarang`;
       $('statusDot').classList.toggle('live',!delayed);
       addPoint(observedTime,state.price999);
       updateCalculator();
