@@ -75,7 +75,7 @@ const server = http.createServer(async (req, res) => {
   const requested = url.pathname === '/' ? 'index.html' : url.pathname.slice(1);
   const file = path.resolve(ROOT, requested);
   if (!file.startsWith(ROOT + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) return send(res, 404, 'Not found', 'text/plain; charset=utf-8');
-  const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png' };
+  const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.avif': 'image/avif' };
   send(res, 200, fs.readFileSync(file), types[path.extname(file)] || 'application/octet-stream');
 });
 
