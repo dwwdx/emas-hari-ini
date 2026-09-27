@@ -150,10 +150,15 @@
     const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
     const PRICE_SOURCES = [
+      { url: './api/gold-price', name: 'server EmasHarini' },
       { url: 'https://www.hargaemas.my/api/gold-prices.json', name: 'hargaemas.my cache' },
-      { url: 'https://api.hargaemas.my/prices', name: 'api.hargaemas.my' },
       { url: './gold-price.json', name: 'salinan tempatan' }
     ];
+
+    function positiveNumber(value){const n=Number(value);return Number.isFinite(n)&&n>0;}
+    function validPriceData(data){const p=data?.prices;return positiveNumber(p?.spotSellRmPerKg)&&positiveNumber(p?.spotBuyRmPerKg);}
+    function optionalMoney(value){return positiveNumber(value)?money(value):'Tidak tersedia';}
+    function optionalRate(value,digits=4){const n=Number(value);return Number.isFinite(n)&&n>0?n.toFixed(digits):'Tidak tersedia';}
 
     function sourceIsStale(data){
       const timestamp = Date.parse(data?.lastUpdate);
@@ -167,6 +172,7 @@
       const button=$('refreshPrice');button.disabled=true;button.classList.add('loading');button.querySelector('span').textContent='Menyemak…';
       let lastError;
       let data;
+      let staleData;
       try{
         for(const source of PRICE_SOURCES){
           try{
@@ -176,11 +182,14 @@
             clearTimeout(timeout);
             if(!response.ok) throw new Error(source.name+' HTTP '+response.status);
             const candidate=await response.json();
-            if(!candidate?.prices?.spotSellRmPerKg) throw new Error(source.name+': format data tidak sah');
-            data={...candidate,source:candidate.source||source.name,checkedAt:new Date().toISOString()};
+            if(!validPriceData(candidate)) throw new Error(source.name+': format data tidak sah');
+            const normalized={...candidate,source:candidate.source||source.name,checkedAt:new Date().toISOString()};
+            if(sourceIsStale(normalized)){staleData ||= normalized;continue;}
+            data=normalized;
             break;
           }catch(error){lastError=error;}
         }
+        if(!data&&staleData)data={...staleData,isStale:true,staleReason:'Sumber harga belum dikemas kini.'};
         if(!data) throw lastError||new Error('Semua sumber harga tidak dapat dicapai');
         renderPrices(data,false);
         try{localStorage.setItem('emasHariniLastPrice',JSON.stringify(data));}catch{}
@@ -204,9 +213,9 @@
       $('price999').textContent = money(state.price999);
       $('price916').textContent = money(state.price916);
       $('tick999').textContent = `${money(state.price999)} /g`;
-      $('tickUsd').textContent = Number(p.usdMyrSell).toFixed(4);
-      $('tickBuy').textContent = `${money(Number(p.spotBuyRmPerKg)/1000)} /g`;
-      $('tickSilver').textContent = money(Number(p.silverSellRmPerKg));
+      $('tickUsd').textContent = optionalRate(p.usdMyrSell);
+      $('tickBuy').textContent = positiveNumber(p.spotBuyRmPerKg)?money(Number(p.spotBuyRmPerKg)/1000)+' /g':'Tidak tersedia';
+      $('tickSilver').textContent = optionalMoney(p.silverSellRmPerKg);
       const updated = new Date(data.lastUpdate);
       const validDate = !Number.isNaN(updated.getTime());
       const checked = new Date(data.checkedAt || data.lastUpdate);
