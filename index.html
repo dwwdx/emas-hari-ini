@@ -94,7 +94,7 @@
             <div class="update-row"><span class="status-dot" id="statusDot"></span><span id="lastUpdate">Mengambil harga terkini…</span></div>
           </article>
           <article class="chart-card" id="carta">
-            <div class="card-kicker">Carta Harga Emas (24K)</div>
+            <div class="card-head"><div class="card-kicker">Carta Harga Emas (24K)</div><span class="per" id="chartTrend">Kumpul bacaan…</span></div>
             <div class="chart-wrap"><canvas id="goldChart" aria-label="Carta garis bacaan sebenar harga emas 24 karat"></canvas></div>
           </article>
         </div>
@@ -239,30 +239,33 @@
 
     function drawChart(){
       const canvas=$('goldChart'), box=canvas.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
-      canvas.width=Math.max(1,box.width*dpr);canvas.height=Math.max(1,box.height*dpr);
-      const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);const w=box.width,h=box.height,pad={l:40,r:8,t:13,b:22};
-      ctx.clearRect(0,0,w,h);
-      if(!state.points.length){ctx.fillStyle='#8b929b';ctx.font="10px 'DM Sans'";ctx.fillText('Menunggu harga terkini…',pad.l,h/2);return;}
-      const values=state.points.map(p=>p.value),rawMin=Math.min(...values),rawMax=Math.max(...values),spread=Math.max(rawMax-rawMin,1),min=rawMin-spread*.25,max=rawMax+spread*.25;
-      ctx.font="8px 'DM Sans'";ctx.textBaseline='middle';
+      const w=box.width,h=box.height;canvas.width=Math.max(1,w*dpr);canvas.height=Math.max(1,h*dpr);
+      const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+      const pad={l:44,r:10,t:15,b:23};
+      const pointsData=state.points.filter(p=>Number.isFinite(p.time)&&Number.isFinite(p.value));
+      const trend=$('chartTrend');
+      if(!pointsData.length){if(trend)trend.textContent='Menunggu bacaan…';ctx.fillStyle='#8b929b';ctx.font="10px 'DM Sans'";ctx.fillText('Menunggu harga terkini…',pad.l,h/2);return;}
+      const values=pointsData.map(p=>p.value),rawMin=Math.min(...values),rawMax=Math.max(...values),spread=Math.max(rawMax-rawMin,Math.abs(rawMax)*.002,1),min=rawMin-spread*.32,max=rawMax+spread*.32;
+      const plotW=Math.max(1,w-pad.l-pad.r),plotH=Math.max(1,h-pad.t-pad.b);
+      const points=pointsData.map((p,i)=>({x:pointsData.length===1?pad.l+plotW/2:pad.l+i*plotW/(pointsData.length-1),y:pad.t+(max-p.value)/(max-min)*plotH,value:p.value,time:p.time}));
+      const first=points[0].value,last=points[points.length-1].value,delta=last-first,goingUp=delta>0,goingDown=delta<0;
+      if(trend)trend.textContent=points.length<2?'Kumpul bacaan…':(goingUp?'↗ Naik ':goingDown?'↘ Turun ':'→ Stabil ')+Math.abs(delta).toFixed(2)+' /g';
+      const lineColor=goingUp?'#2d9669':goingDown?'#c46b42':'#bb8017';
+      ctx.font="8px 'DM Sans'";ctx.textBaseline='middle';ctx.textAlign='right';
       for(let i=0;i<3;i++){
-        const y=pad.t+i*(h-pad.t-pad.b)/2,value=max-i*(max-min)/2;
-        ctx.strokeStyle='#ece6da';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();
-        ctx.fillStyle='#8b929b';ctx.textAlign='right';ctx.fillText(`RM${value.toFixed(2)}`,pad.l-5,y);
+        const y=pad.t+i*plotH/2,value=max-i*(max-min)/2;ctx.strokeStyle='#ece6da';ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#8b929b';ctx.fillText('RM'+value.toFixed(2),pad.l-6,y);
       }
-      const plotW=w-pad.l-pad.r,plotH=h-pad.t-pad.b;
-      const points=state.points.map((p,i)=>({x:state.points.length===1?pad.l+plotW/2:pad.l+i*plotW/(state.points.length-1),y:pad.t+(max-p.value)/(max-min)*plotH}));
+      const curvePath=()=>{const path=[];path.push(['M',points[0].x,points[0].y]);for(let i=1;i<points.length;i++){const prev=points[i-1],curr=points[i],mid=(prev.x+curr.x)/2;path.push(['Q',prev.x,prev.y,mid,(prev.y+curr.y)/2]);}if(points.length>1){const lastPoint=points[points.length-1],prev=points[points.length-2];path.push(['Q',prev.x+(lastPoint.x-prev.x)/2,(prev.y+lastPoint.y)/2,lastPoint.x,lastPoint.y]);}return path;};
+      const trace=(path)=>{ctx.beginPath();for(const part of path){if(part[0]==='M')ctx.moveTo(part[1],part[2]);else ctx.quadraticCurveTo(part[1],part[2],part[3],part[4]);}};
       if(points.length>1){
-        const fill=ctx.createLinearGradient(0,pad.t,0,h-pad.b);fill.addColorStop(0,'rgba(199,145,37,.30)');fill.addColorStop(1,'rgba(199,145,37,0)');
-        ctx.beginPath();ctx.moveTo(points[0].x,h-pad.b);points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.lineTo(p.x,p.y));ctx.lineTo(points.at(-1).x,h-pad.b);ctx.closePath();ctx.fillStyle=fill;ctx.fill();
-        ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.strokeStyle='#bb8017';ctx.lineWidth=2.2;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
-      }
-      const last=points.at(-1);ctx.beginPath();ctx.arc(last.x,last.y,4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle='#bb8017';ctx.stroke();
+        const path=curvePath();trace(path);ctx.lineTo(points.at(-1).x,h-pad.b);ctx.lineTo(points[0].x,h-pad.b);ctx.closePath();const fill=ctx.createLinearGradient(0,pad.t,0,h-pad.b);fill.addColorStop(0,goingUp?'rgba(45,150,105,.26)':'rgba(187,128,23,.25)');fill.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=fill;ctx.fill();
+        trace(path);ctx.strokeStyle=lineColor;ctx.lineWidth=2.4;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
+      } else {ctx.strokeStyle='#d8c294';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(pad.l,points[0].y);ctx.lineTo(w-pad.r,points[0].y);ctx.stroke();ctx.setLineDash([]);}
+      const lastPoint=points.at(-1);ctx.beginPath();ctx.arc(lastPoint.x,lastPoint.y,5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=lineColor;ctx.stroke();
       const formatTime=t=>new Intl.DateTimeFormat('ms-MY',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(t));
-      ctx.fillStyle='#8b929b';ctx.font="8px 'DM Sans'";ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText(formatTime(state.points[0].time),pad.l,h);ctx.textAlign='right';ctx.fillText(formatTime(state.points.at(-1).time),w-pad.r,h);
-      ctx.fillStyle='#9a6c16';ctx.font="800 9px 'Manrope'";ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText(money(state.points.at(-1).value),w-pad.r,pad.t+2);
+      ctx.fillStyle='#8b929b';ctx.font="8px 'DM Sans'";ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText(formatTime(points[0].time),pad.l,h);ctx.textAlign='right';ctx.fillText(formatTime(lastPoint.time),w-pad.r,h);
+      ctx.fillStyle=lineColor;ctx.font="800 9px 'Manrope'";ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText(money(lastPoint.value),w-pad.r,pad.t+2);
     }
-
     function updateCalculator(){
       const weight=Math.max(0,Number($('weight').value)||0),is916=$('purity').value.includes('916');
       const rate=is916?state.price916:state.price999;
