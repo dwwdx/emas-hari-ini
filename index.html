@@ -57,6 +57,9 @@
       .hero{padding:34px 0 76px}h1{font-size:40px}.hero-copy{font-size:14px}.hero-visual{min-height:560px;margin:0}.gold-scene{height:220px;border-radius:21px}.live-panels{left:0;right:0;top:180px;bottom:auto;grid-template-columns:1fr}.price-card,.chart-card{padding:16px}.chart-wrap{height:115px}
       .market{padding-top:28px}.market-bar{display:block}.market-label{padding:14px 16px;border-bottom:1px solid #eeeae1}.ticker{grid-template-columns:1fr 1fr}.tick{border-bottom:1px solid #eeeae1}.features{padding-top:12px}.feature-grid{grid-template-columns:1fr}.feature:last-child{grid-column:auto}.feature{min-height:0}.section-row{align-items:flex-start;flex-direction:column}.outline-button{display:inline-flex;align-self:flex-start}.empty-section{padding:38px 0}.empty-space{height:110px}.footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}.footer-brand{grid-column:1/-1}.footer-bottom{display:block;line-height:1.7}.footer-bottom span:last-child{display:block;margin-top:7px}
     }
+  
+    .product-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:28px}.product-feature-grid .product-feature{display:flex;flex-direction:column;gap:14px;align-items:stretch;margin:0;padding:14px}.product-feature-grid .product-feature-media{width:100%;padding:8px}.product-feature-grid .product-feature-copy{display:flex;flex:1;flex-direction:column}.product-feature-grid .product-feature-title{font-size:21px}.product-feature-grid .product-feature-bottom{margin-top:auto;padding-top:14px}.product-feature-grid .product-feature-bottom strong{font-size:20px}
+    @media(max-width:900px){.product-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   </style>
 </head>
 <body>
@@ -128,9 +131,11 @@
     </div>
   </section>
   <section class="empty-section" id="produk">
-    <div class="shell"><div class="section-row"><div><div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20 13-7 7-9-9 7-7h7l2 2v7Z"/><circle cx="15" cy="9" r="1"/></svg>Produk Pilihan</div><h2 class="section-title">Pilih Produk Emas Terbaik</h2></div><a class="outline-button" href="produk.html">Lihat Semua Produk →</a></div><div class="product-feature">
-      <a class="product-feature-media" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer" aria-label="Lihat produk HABIB 1gm 999.9 Gold Bar di Shopee"><img src="habib-gold-bar.jpg" alt="HABIB 1gm 999.9 Gold Bar Manufactured By LBMA Goods Delivery Refiner"></a>
-      <div class="product-feature-copy"><div class="product-feature-kicker">Pilihan Shopee</div><h3 class="product-feature-title">HABIB 1gm 999.9 Gold Bar</h3><p class="product-feature-desc">Gold bar 999.9 daripada HABIB, manufactured by LBMA Goods Delivery Refiner.</p><div class="product-feature-bottom"><strong>RM648.72</strong><a class="product-feature-link" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer">Lihat di Shopee <span aria-hidden="true">↗</span></a></div></div>
+    <div class="shell"><div class="section-row"><div><div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20 13-7 7-9-9 7-7h7l2 2v7Z"/><circle cx="15" cy="9" r="1"/></svg>Produk Pilihan</div><h2 class="section-title">Pilih Produk Emas Terbaik</h2></div><a class="outline-button" href="produk.html">Lihat Semua Produk →</a></div><div class="product-feature-grid">
+      <article class="product-feature">
+        <a class="product-feature-media" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer" aria-label="Lihat produk HABIB 1gm 999.9 Gold Bar di Shopee"><img src="https://raw.githubusercontent.com/dwwdx/emas-hari-ini/main/habib-gold-bar.jpg" alt="HABIB 1gm 999.9 Gold Bar Manufactured By LBMA Goods Delivery Refiner" loading="lazy"></a>
+        <div class="product-feature-copy"><div class="product-feature-kicker">Pilihan Shopee</div><h3 class="product-feature-title">HABIB 1gm 999.9 Gold Bar</h3><p class="product-feature-desc">Gold bar 999.9 daripada HABIB, manufactured by LBMA Goods Delivery Refiner.</p><div class="product-feature-bottom"><strong>RM648.72</strong><a class="product-feature-link" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer">Lihat di Shopee <span aria-hidden="true">↗</span></a></div></div>
+      </article>
     </div></div>
   </section>
   <section class="empty-section articles" id="artikel">
