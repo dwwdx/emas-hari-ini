@@ -13,22 +13,27 @@
     .product-grid{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:38px;align-items:center;margin-top:38px}.product-media{display:block;position:relative;text-decoration:none;background:#fff;border:1px solid #eee7d9;border-radius:20px;padding:12px;box-shadow:0 18px 45px rgba(42,35,20,.1);transition:.25s transform,.25s box-shadow}.product-media:hover{transform:translateY(-4px);box-shadow:0 24px 54px rgba(42,35,20,.16)}.product-media img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:16px;background:#fff}.image-hint{position:absolute;right:30px;bottom:30px;display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:999px;background:rgba(16,33,58,.9);color:#fff;font-size:11px;font-weight:700}.product-info{max-width:360px}.product-kicker{color:#9b6c13;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.product-title{margin:12px 0 18px;font:800 clamp(26px,3.2vw,42px)/1.1 'Manrope',sans-serif;letter-spacing:-.045em}.product-price{color:#b47b13;font:800 clamp(28px,4vw,44px)/1 'Manrope',sans-serif;letter-spacing:-.04em}.product-note{margin:8px 0 24px;color:var(--muted);font-size:13px}.product-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 18px;border-radius:12px;background:linear-gradient(135deg,#b98019,#dba83d);box-shadow:0 10px 22px rgba(188,132,28,.22);color:#fff;text-decoration:none;font-size:13px;font-weight:800;transition:.2s transform,.2s box-shadow}.product-cta:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(188,132,28,.3)}
     @media(max-width:760px){.product-grid{grid-template-columns:1fr;gap:28px}.product-media{max-width:360px;margin:auto}.product-info{max-width:none}.product-title{font-size:32px}}
     @media(max-width:640px){.shell{width:calc(100% - 28px)}.nav{height:74px}.brand-logo{width:48px;height:48px;border-radius:14px;object-fit:cover;overflow:hidden;box-shadow:0 3px 10px rgba(161,112,23,.16);}.brand-name{font-size:22px}.page{padding:48px 0 90px}.empty{height:220px}}
+  
+    .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch;margin-top:34px;max-width:none}.catalog-card{display:flex;flex-direction:column;min-width:0;background:#fff;border:1px solid #eee7d9;border-radius:20px;overflow:hidden;box-shadow:0 12px 30px rgba(42,35,20,.08)}.catalog-card .product-media{border:0;border-radius:0;padding:12px;box-shadow:none}.catalog-card .product-media:hover{transform:none;box-shadow:none}.catalog-card .product-info{display:flex;flex:1;flex-direction:column;max-width:none;padding:0 16px 18px}.catalog-card .product-title{margin:9px 0 14px;font-size:20px}.catalog-card .product-price{font-size:28px}.catalog-card .product-cta{align-self:flex-start;margin-top:auto}.catalog-card .product-note{margin-bottom:18px}
+    @media(max-width:900px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   </style>
 </head>
 <body>
   <header class="nav"><div class="shell nav-inner"><a class="brand" href="index.html#utama" aria-label="Emastracker - halaman utama"><img class="brand-logo" src="emastracker-logo.jpg?v=1" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a><a class="back" href="index.html">← Kembali</a></div></header>
   <main class="page"><div class="shell"><div class="eyebrow">Produk Pilihan</div><h1 class="title">Produk Emas</h1><p class="copy">Pilihan emas fizikal daripada Shopee. Klik gambar atau butang untuk melihat produk.</p><div class="product-grid">
-      <a class="product-media" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer" aria-label="Lihat produk HABIB 1gm 999.9 Gold Bar di Shopee">
-        <img src="habib-gold-bar.jpg" alt="HABIB 1gm 999.9 Gold Bar Manufactured By LBMA Goods Delivery Refiner">
-        <span class="image-hint">Lihat di Shopee <span aria-hidden="true">↗</span></span>
-      </a>
-      <div class="product-info">
-        <div class="product-kicker">Produk pilihan</div>
-        <h2 class="product-title">HABIB 1gm 999.9 Gold Bar Manufactured By LBMA Goods Delivery Refiner</h2>
-        <div class="product-price">RM648.72</div>
-        <p class="product-note">Harga selepas baucer</p>
-        <a class="product-cta" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer">Lihat produk di Shopee <span aria-hidden="true">↗</span></a>
-      </div>
+      <article class="catalog-card">
+        <a class="product-media" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer" aria-label="Lihat produk HABIB 1gm 999.9 Gold Bar di Shopee">
+          <img src="https://raw.githubusercontent.com/dwwdx/emas-hari-ini/main/habib-gold-bar.jpg" alt="HABIB 1gm 999.9 Gold Bar Manufactured By LBMA Goods Delivery Refiner" loading="lazy">
+          <span class="image-hint">Lihat di Shopee <span aria-hidden="true">↗</span></span>
+        </a>
+        <div class="product-info">
+          <div class="product-kicker">Produk pilihan</div>
+          <h2 class="product-title">HABIB 1gm 999.9 Gold Bar Manufactured By LBMA Goods Delivery Refiner</h2>
+          <div class="product-price">RM648.72</div>
+          <p class="product-note">Harga selepas baucer</p>
+          <a class="product-cta" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer">Lihat produk di Shopee <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
     </div></div></main>
 </body>
 </html>
