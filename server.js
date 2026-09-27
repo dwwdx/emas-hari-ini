@@ -79,4 +79,4 @@ const server = http.createServer(async (req, res) => {
   send(res, 200, fs.readFileSync(file), types[path.extname(file)] || 'application/octet-stream');
 });
 
-server.listen(PORT, '0.0.0.0', () => console.log(`EmasHarini ready on port ${PORT}`));
+server.listen(PORT, '0.0.0.0', () => console.log(`Emastracker ready on port ${PORT}`));
