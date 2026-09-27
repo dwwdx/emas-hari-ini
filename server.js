@@ -30,8 +30,10 @@ function send(res, status, body, type = 'application/json; charset=utf-8') {
 }
 
 function validPrice(data) {
-  const value = Number(data?.prices?.spotSellRmPerKg);
-  return Number.isFinite(value) && value > 1000 && value < 10000000 && data?.lastUpdate;
+  const sell = Number(data?.prices?.spotSellRmPerKg);
+  const buy = Number(data?.prices?.spotBuyRmPerKg);
+  return Number.isFinite(sell) && sell > 1000 && sell < 10000000
+    && Number.isFinite(buy) && buy > 0 && data?.lastUpdate;
 }
 
 function normalizeData(data, sourceName) {
