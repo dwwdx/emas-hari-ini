@@ -70,6 +70,9 @@
     .product-feature-grid .product-feature:nth-child(n+4){display:flex}
     @media(max-width:900px){.product-feature-grid .product-feature{flex-basis:calc((100% - 12px)/2)}}
     @media(max-width:640px){.product-feature-grid .product-feature{flex-basis:calc((100% - 10px)/2);min-width:0}}
+  
+    /* Keep the homepage rail fixed at seven featured products. */
+    .home-product-rail > .product-feature:nth-child(n+8){display:none!important}
   </style>
 </head>
 <body>
@@ -141,7 +144,8 @@
     </div>
   </section>
   <section class="empty-section" id="produk">
-    <div class="shell"><div class="section-row"><div><div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20 13-7 7-9-9 7-7h7l2 2v7Z"/><circle cx="15" cy="9" r="1"/></svg>Produk Pilihan</div><h2 class="section-title">Pilih Produk Emas Terbaik</h2></div><a class="outline-button" href="produk.html">Lihat Semua Produk →</a></div><div class="product-feature-grid">
+    <div class="shell"><div class="section-row"><div><div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m20 13-7 7-9-9 7-7h7l2 2v7Z"/><circle cx="15" cy="9" r="1"/></svg>Produk Pilihan</div><h2 class="section-title">Pilih Produk Emas Terbaik</h2></div><a class="outline-button" href="produk.html">Lihat Semua Produk →</a></div><!-- Homepage product rail is intentionally capped at seven products. Add future products to produk.html only. -->
+    <div class="product-feature-grid home-product-rail" data-home-product-limit="7">
       <article class="product-feature">
         <a class="product-feature-media" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer" aria-label="Lihat produk HABIB 1gm 999.9 Gold Bar di Shopee"><img src="https://raw.githubusercontent.com/dwwdx/emas-hari-ini/main/habib-gold-bar.jpg" alt="HABIB 1gm 999.9 Gold Bar Manufactured By LBMA Goods Delivery Refiner" loading="lazy"></a>
         <div class="product-feature-copy"><div class="product-feature-kicker">Pilihan Shopee</div><h3 class="product-feature-title">HABIB 1gm 999.9 Gold Bar</h3><p class="product-feature-desc">Gold bar 999.9 daripada HABIB, manufactured by LBMA Goods Delivery Refiner.</p><div class="product-feature-bottom"><strong>RM648.72</strong><a class="product-feature-link" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer">Lihat di Shopee <span aria-hidden="true">↗</span></a></div></div>
