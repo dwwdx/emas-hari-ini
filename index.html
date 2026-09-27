@@ -280,7 +280,7 @@
     $('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.toLowerCase();const id=q.includes('artikel')||q.includes('berita')?'artikel':q.includes('produk')?'produk':q.includes('kalkulator')?'panduan':q.includes('carta')?'carta':'harga';document.getElementById(id).scrollIntoView({behavior:'smooth'});$('searchPanel').classList.remove('open');}});
     $('refreshPrice').addEventListener('click',()=>fetchGoldPrice(true));
     window.addEventListener('online',()=>fetchGoldPrice(true));window.addEventListener('resize',drawChart);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-state.lastChecked>120000)fetchGoldPrice(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
-    restoreSavedPrice();fetchGoldPrice();
+    fetchGoldPrice().then(()=>{if(!state.price999)restoreSavedPrice();});
   </script>
 </body>
 </html>
