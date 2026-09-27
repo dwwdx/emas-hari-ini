@@ -149,34 +149,54 @@
     const $ = (id) => document.getElementById(id);
     const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
+    const PRICE_SOURCES = [
+      { url: 'https://api.hargaemas.my/prices', name: 'api.hargaemas.my' },
+      { url: 'https://hargaemas.my/api/gold-prices.json', name: 'hargaemas.my cache' },
+      { url: './gold-price.json', name: 'salinan tempatan' }
+    ];
+
+    function sourceIsStale(data){
+      const timestamp = Date.parse(data?.lastUpdate);
+      const ageIsKnown = Number.isFinite(timestamp);
+      const olderThanSixHours = ageIsKnown && Date.now() - timestamp > 6 * 60 * 60 * 1000;
+      return Boolean(data?.isStale) || Number(data?.staleAgeMinutes) > 360 || olderThanSixHours;
+    }
     async function fetchGoldPrice(manual=false){
       if(state.fetching) return;
       state.fetching=true;
       const button=$('refreshPrice');button.disabled=true;button.classList.add('loading');button.querySelector('span').textContent='Menyemak…';
       let lastError;
+      let data;
       try{
-        const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);
-        const response = await fetch('./gold-price.json?ts=' + Date.now(),{headers:{'Accept':'application/json'},cache:'no-store',signal:controller.signal});
-        clearTimeout(timeout);
-        if(!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        if(!data?.prices?.spotSellRmPerKg) throw new Error('Format data tidak sah');
+        for(const source of PRICE_SOURCES){
+          try{
+            const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);
+            const separator=source.url.includes('?')?'&':'?';
+            const response=await fetch(source.url+separator+'ts='+Date.now(),{headers:{'Accept':'application/json'},cache:'no-store',signal:controller.signal});
+            clearTimeout(timeout);
+            if(!response.ok) throw new Error(source.name+' HTTP '+response.status);
+            const candidate=await response.json();
+            if(!candidate?.prices?.spotSellRmPerKg) throw new Error(source.name+': format data tidak sah');
+            data={...candidate,source:candidate.source||source.name,checkedAt:new Date().toISOString()};
+            break;
+          }catch(error){lastError=error;}
+        }
+        if(!data) throw lastError||new Error('Semua sumber harga tidak dapat dicapai');
         renderPrices(data,false);
         try{localStorage.setItem('emasHariniLastPrice',JSON.stringify(data));}catch{}
-        if(manual) showToast(data.isStale||data.servedFromCache?'Sumber masih memulangkan bacaan lama.':'Harga terkini telah disemak.');
-        scheduleRefresh(300000);
+        if(manual) showToast(sourceIsStale(data)?'API dapat dicapai tetapi bacaan sumber sudah lama.':'Harga terkini telah disemak.');
+        scheduleRefresh(120000);
       }catch(error){ lastError = error; }
       finally{
         state.fetching=false;button.disabled=false;button.classList.remove('loading');button.querySelector('span').textContent='Semak Terkini';
       }
-      if(lastError){
+      if(lastError && !data){
         $('statusDot').classList.remove('live');
         $('lastUpdate').textContent=state.price999?'Bacaan terakhir dipaparkan · cuba semula automatik':'Harga langsung tidak dapat dicapai';
         if(manual||!state.price999) showToast('Sambungan API terganggu. Harga terakhir tidak dipadam.');
         scheduleRefresh(30000);console.warn(lastError);
       }
     }
-
     function renderPrices(data,fromDevice=false){
       const p = data.prices;
       state.price999 = Number(p.spotSellRmPerKg) / 1000;
@@ -194,7 +214,7 @@
       const sourceTime=validDate?new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(updated):'sebentar tadi';
       const sourceName=data.source?` · ${data.source}`:'';
       state.lastChecked=Date.now();
-      const delayed=Boolean(data.isStale||data.servedFromCache||fromDevice);
+      const delayed=sourceIsStale(data)||Boolean(data.servedFromCache)||fromDevice;
       $('lastUpdate').textContent=delayed
         ? `Bacaan terakhir · sumber ${sourceTime}${sourceName}`
         : `Sumber ${sourceTime}${sourceName} · disemak sekarang`;
