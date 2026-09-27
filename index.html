@@ -214,7 +214,7 @@
       $('tick999').textContent = `${money(state.price999)} /g`;
       $('tickUsd').textContent = optionalRate(p.usdMyrSell);
       $('tickBuy').textContent = positiveNumber(p.spotBuyRmPerKg)?money(Number(p.spotBuyRmPerKg)/1000)+' /g':'Tidak tersedia';
-      $('tickSilver').textContent = optionalMoney(p.silverSellRmPerKg);
+      $('tickSilver').textContent = '—';
       const updated = new Date(data.lastUpdate);
       const validDate = !Number.isNaN(updated.getTime());
       const checked = new Date(data.checkedAt || data.lastUpdate);
