@@ -156,7 +156,7 @@
       let lastError;
       try{
         const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);
-        const response = await fetch(`/api/gold-price${manual?'?refresh=1':''}`,{headers:{'Accept':'application/json'},cache:'no-store',signal:controller.signal});
+        const response = await fetch('./gold-price.json?ts=' + Date.now(),{headers:{'Accept':'application/json'},cache:'no-store',signal:controller.signal});
         clearTimeout(timeout);
         if(!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
@@ -164,7 +164,7 @@
         renderPrices(data,false);
         try{localStorage.setItem('emasHariniLastPrice',JSON.stringify(data));}catch{}
         if(manual) showToast(data.isStale||data.servedFromCache?'Sumber masih memulangkan bacaan lama.':'Harga terkini telah disemak.');
-        scheduleRefresh(120000);
+        scheduleRefresh(300000);
       }catch(error){ lastError = error; }
       finally{
         state.fetching=false;button.disabled=false;button.classList.remove('loading');button.querySelector('span').textContent='Semak Terkini';
