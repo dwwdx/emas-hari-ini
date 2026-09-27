@@ -150,8 +150,8 @@
     const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
     const PRICE_SOURCES = [
-      { url: 'https://api.hargaemas.my/prices', name: 'api.hargaemas.my' },
       { url: 'https://hargaemas.my/api/gold-prices.json', name: 'hargaemas.my cache' },
+      { url: 'https://api.hargaemas.my/prices', name: 'api.hargaemas.my' },
       { url: './gold-price.json', name: 'salinan tempatan' }
     ];
 
