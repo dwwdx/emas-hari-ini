@@ -163,7 +163,7 @@
         if(!data?.prices?.spotSellRmPerKg) throw new Error('Format data tidak sah');
         renderPrices(data,false);
         try{localStorage.setItem('emasHariniLastPrice',JSON.stringify(data));}catch{}
-        if(manual) showToast(data.servedFromCache?'Sumber sedang terganggu. Bacaan terakhir dikekalkan.':'Harga terkini telah disemak.');
+        if(manual) showToast(data.isStale||data.servedFromCache?'Sumber masih memulangkan bacaan lama.':'Harga terkini telah disemak.');
         scheduleRefresh(120000);
       }catch(error){ lastError = error; }
       finally{
@@ -189,14 +189,17 @@
       $('tickSilver').textContent = money(Number(p.silverSellRmPerKg));
       const updated = new Date(data.lastUpdate);
       const validDate = !Number.isNaN(updated.getTime());
+      const checked = new Date(data.checkedAt || data.lastUpdate);
+      const observedTime = !Number.isNaN(checked.getTime()) ? checked.getTime() : Date.now();
       const sourceTime=validDate?new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(updated):'sebentar tadi';
+      const sourceName=data.source?` · ${data.source}`:'';
       state.lastChecked=Date.now();
       const delayed=Boolean(data.isStale||data.servedFromCache||fromDevice);
       $('lastUpdate').textContent=delayed
-        ? `Bacaan terakhir · sumber ${sourceTime}`
-        : `Sumber ${sourceTime} · disemak sekarang`;
+        ? `Bacaan terakhir · sumber ${sourceTime}${sourceName}`
+        : `Sumber ${sourceTime}${sourceName} · disemak sekarang`;
       $('statusDot').classList.toggle('live',!delayed);
-      addPoint(validDate?updated.getTime():Date.now(),state.price999);
+      addPoint(observedTime,state.price999);
       updateCalculator();
     }
 
