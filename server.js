@@ -8,34 +8,15 @@ const CACHE_MS = 120000;
 const MAX_SOURCE_AGE_MS = 6 * 60 * 60 * 1000;
 const SOURCES = [
   {
-    name: 'xaus.com',
-    url: 'https://xaus.com/api/v1/spot?currency=MYR&unit=gram&compact=1',
-    normalize(payload) {
-      const pricePerGram = Number(payload?.xau?.price);
-      const fx = Number(payload?.fx_rate);
-      const lastUpdate = payload?.updated_at || payload?.price_as_of;
-      if (!Number.isFinite(pricePerGram) || pricePerGram <= 0) return null;
-      const perKg = pricePerGram * 1000;
-      const tael = pricePerGram * 37.429;
-      return {
-        prices: {
-          spotSellRmPerKg: perKg,
-          spotBuyRmPerKg: perKg,
-          taelSellRm: tael,
-          taelBuyRm: tael,
-          silverSellRmPerKg: 0,
-          silverBuyRmPerKg: 0,
-          usdMyrSell: Number.isFinite(fx) ? fx : 0,
-          usdMyrBuy: Number.isFinite(fx) ? fx : 0
-        },
-        lastUpdate,
-        isStale: Boolean(payload?.stale || payload?.data_state?.status !== 'fresh'),
-        source: 'xaus.com',
-      };
-    }
+    name: 'hargaemas.my',
+    url: 'https://api.hargaemas.my/prices',
+    normalize(payload) { return payload; }
   },
-  { name: 'hargaemas.my', url: 'https://api.hargaemas.my/prices', normalize(payload) { return payload; } },
-  { name: 'hargaemas.my fallback', url: 'https://hargaemas.my/api/gold-prices.json', normalize(payload) { return payload; } }
+  {
+    name: 'hargaemas.my fallback',
+    url: 'https://hargaemas.my/api/gold-prices.json',
+    normalize(payload) { return payload; }
+  }
 ];
 let cache = { data: null, time: 0 };
 
