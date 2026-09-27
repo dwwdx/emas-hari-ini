@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Harga emas Malaysia semasa, carta harga dan kalkulator emas.">
-  <title>EmasHarini — Harga Emas Malaysia Hari Ini</title>
+  <title>Emastracker — Harga Emas Malaysia Hari Ini</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
     :root{
@@ -60,9 +60,9 @@
 <body>
   <header class="nav">
     <div class="shell nav-inner">
-      <a class="brand" href="#utama" aria-label="EmasHarini - halaman utama">
-        <img class="brand-logo" src="logo-emasharini.jpg" alt="Logo EmasHarini">
-        <div><div class="brand-name">Emas<span>Harini</span></div><div class="brand-tag">Harga · Info · Panduan</div></div>
+      <a class="brand" href="#utama" aria-label="Emastracker - halaman utama">
+        <img class="brand-logo" src="logo-emasharini.jpg" alt="Logo Emastracker">
+        <div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
         <a class="active" href="#harga">Harga Emas</a><a href="#carta">Carta</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a><a href="#tentang">Tentang Kami</a>
@@ -134,12 +134,12 @@
   </main>
   <footer class="footer" id="tentang"><div class="shell">
     <div class="footer-grid">
-      <div class="footer-brand"><a class="brand" href="#utama"><img class="brand-logo" src="logo-emasharini.jpg" alt="Logo EmasHarini"><div><div class="brand-name">Emas<span>Harini</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a></div>
+      <div class="footer-brand"><a class="brand" href="#utama"><img class="brand-logo" src="logo-emasharini.jpg" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a></div>
       <div><h4>Pautan Pantas</h4><div class="footer-nav"><a href="#harga">Harga Emas</a><a href="#carta">Carta</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a></div></div>
       <div><h4>Ikuti Kami</h4><div class="socials"><span class="social">f</span><span class="social">in</span><span class="social">▶</span><span class="social">t</span></div></div>
       <div><h4>Sumber Harga Emas</h4><div class="source-text">Harga emas terkini daripada sumber berstruktur dan boleh dipercayai.<a href="https://www.hargaemas.my/gold-price-api-malaysia" target="_blank" rel="noopener">HargaEmas.my — harga spot</a></div></div>
     </div>
-    <div class="footer-bottom"><span>© 2026 EmasHarini. Semua hak cipta terpelihara.</span><span>Maklumat di laman ini adalah untuk tujuan maklumat sahaja dan bukan nasihat kewangan.</span></div>
+    <div class="footer-bottom"><span>© 2026 Emastracker. Semua hak cipta terpelihara.</span><span>Maklumat di laman ini adalah untuk tujuan maklumat sahaja dan bukan nasihat kewangan.</span></div>
   </div></footer>
   <div class="search-panel" id="searchPanel"><div class="search-inner"><input id="searchInput" type="search" placeholder="Cari halaman…" aria-label="Carian"><button class="round-button" id="closeSearch" aria-label="Tutup carian">×</button></div></div>
   <div class="modal" id="calcModal" role="dialog" aria-modal="true" aria-labelledby="calcTitle"><div class="modal-box"><div class="modal-head"><h2 id="calcTitle">Kalkulator Emas</h2><button class="close" id="closeCalc" aria-label="Tutup">×</button></div><div class="field"><label for="weight">Berat emas (gram)</label><input id="weight" inputmode="decimal" type="number" min="0" step="0.01" value="1"></div><div class="field"><label for="purity">Ketulenan</label><select id="purity"><option value="999 / 24K">999 / 24K</option><option value="916 / 22K">916 / 22K</option></select></div><div class="calc-result" id="calcResult">RM --.--</div></div></div>
@@ -150,7 +150,7 @@
     const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
     const PRICE_SOURCES = [
-      { url: './api/gold-price', name: 'server EmasHarini' },
+      { url: './api/gold-price', name: 'server Emastracker' },
       { url: 'https://www.hargaemas.my/api/gold-prices.json', name: 'hargaemas.my API' }
     ];
 
