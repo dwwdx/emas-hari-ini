@@ -28,17 +28,28 @@
 <body>
   <header class="nav"><div class="shell nav-inner"><a class="brand" href="index.html#utama" aria-label="Emastracker - halaman utama"><img class="brand-logo" src="emastracker-logo.jpg?v=1" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a><a class="back" href="index.html">← Kembali</a></div></header>
   <main class="page"><div class="shell"><div class="eyebrow">Produk Pilihan</div><h1 class="title">Produk Emas</h1><p class="copy">Pilihan emas fizikal daripada Shopee. Klik gambar atau butang untuk melihat produk.</p><div class="catalog-tools" aria-label="Tapis dan susun produk">
-      <div class="filter-toolbar"><span class="catalog-tool-label">Tapis produk</span><div class="filter-buttons" role="group" aria-label="Kategori produk">
-        <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">Semua</button>
-        <button class="filter-button" type="button" data-filter="gelang" aria-pressed="false">Gelang</button>
-        <button class="filter-button" type="button" data-filter="999" aria-pressed="false">Emas 999</button>
-        <button class="filter-button" type="button" data-filter="916" aria-pressed="false">Emas 916</button>
-        <button class="filter-button" type="button" data-filter="bar" aria-pressed="false">Gold bar / Dinar</button>
-      </div></div>
+      <div class="filter-toolbar">
+        <span class="catalog-tool-label">Tapis kategori</span>
+        <div class="filter-buttons" role="group" aria-label="Kategori produk">
+          <button class="filter-button active" type="button" data-category-filter="all" aria-pressed="true">Semua</button>
+          <button class="filter-button" type="button" data-category-filter="gelang" aria-pressed="false">Gelang</button>
+          <button class="filter-button" type="button" data-category-filter="999" aria-pressed="false">Emas 999</button>
+          <button class="filter-button" type="button" data-category-filter="916" aria-pressed="false">Emas 916</button>
+          <button class="filter-button" type="button" data-category-filter="bar" aria-pressed="false">Gold bar / Dinar</button>
+        </div>
+        <span class="catalog-tool-label">Tapis jenama</span>
+        <div class="filter-buttons" role="group" aria-label="Jenama produk">
+          <button class="filter-button active" type="button" data-brand-filter="all" aria-pressed="true">Semua jenama</button>
+          <button class="filter-button" type="button" data-brand-filter="masdora" aria-pressed="false">MASDORA</button>
+          <button class="filter-button" type="button" data-brand-filter="habib" aria-pressed="false">HABIB</button>
+          <button class="filter-button" type="button" data-brand-filter="tomei" aria-pressed="false">TOMEI</button>
+          <button class="filter-button" type="button" data-brand-filter="wing-sing" aria-pressed="false">Wing Sing</button>
+        </div>
+      </div>
       <label class="sort-toolbar" for="productSort"><span class="catalog-tool-label">Susun</span><select id="productSort" aria-label="Susun produk"><option value="featured">Pilihan</option><option value="price-asc">Harga rendah → tinggi</option><option value="price-desc">Harga tinggi → rendah</option><option value="name">Nama A → Z</option></select></label>
       <div class="catalog-count" id="catalogCount" aria-live="polite"></div>
     </div>
-    <p class="catalog-empty" id="catalogEmpty" hidden>Tiada produk dalam kategori ini.</p>
+    <p class="catalog-empty" id="catalogEmpty" hidden>Tiada produk yang sepadan dengan pilihan tapis.</p>
     <div class="product-grid">
       <article class="catalog-card">
         <a class="product-media" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer" aria-label="Lihat produk HABIB 1gm 999.9 Gold Bar di Shopee">
@@ -150,14 +161,15 @@
   const grid = document.querySelector('.product-grid');
   if (!grid) return;
   const cards = [...grid.querySelectorAll('.catalog-card')];
-  const buttons = [...document.querySelectorAll('[data-filter]')];
+  const categoryButtons = [...document.querySelectorAll('[data-category-filter]')];
+  const brandButtons = [...document.querySelectorAll('[data-brand-filter]')];
   const sort = document.getElementById('productSort');
   const count = document.getElementById('catalogCount');
   const empty = document.getElementById('catalogEmpty');
   const order = new Map(cards.map((card, index) => [card, index]));
   const priceOf = card => { const value = card.querySelector('.product-price')?.textContent.match(/[\d,.]+/); return value ? Number(value[0].replace(/,/g, '')) : 0; };
   const nameOf = card => (card.querySelector('.product-title')?.textContent || '').trim().toLowerCase();
-  const matches = (card, filter) => {
+  const matchesCategory = (card, filter) => {
     const text = card.textContent.toLowerCase();
     const bracelet = /gelang|rantai tangan/.test(text);
     if (filter === 'gelang') return bracelet;
@@ -166,9 +178,15 @@
     if (filter === 'bar') return !bracelet;
     return true;
   };
+  const matchesBrand = (card, filter) => {
+    if (filter === 'all') return true;
+    return card.textContent.toLowerCase().includes(filter === 'wing-sing' ? 'wing sing' : filter);
+  };
   const render = () => {
-    const active = document.querySelector('[data-filter].active')?.dataset.filter || 'all';
-    const visible = cards.filter(card => matches(card, active));
+    const category = document.querySelector('[data-category-filter].active')?.dataset.categoryFilter || 'all';
+    const brand = document.querySelector('[data-brand-filter].active')?.dataset.brandFilter || 'all';
+    const matches = card => matchesCategory(card, category) && matchesBrand(card, brand);
+    const visible = cards.filter(matches);
     const sortValue = sort?.value || 'featured';
     const sorted = [...cards].sort((a, b) => {
       if (sortValue === 'price-asc') return priceOf(a) - priceOf(b);
@@ -176,14 +194,13 @@
       if (sortValue === 'name') return nameOf(a).localeCompare(nameOf(b), 'ms');
       return order.get(a) - order.get(b);
     });
-    sorted.forEach(card => { grid.append(card); card.classList.toggle('is-filtered-out', !matches(card, active)); });
+    sorted.forEach(card => { grid.append(card); card.classList.toggle('is-filtered-out', !matches(card)); });
     if (count) count.textContent = visible.length + ' daripada ' + cards.length + ' produk';
     if (empty) empty.hidden = visible.length > 0;
   };
-  buttons.forEach(button => button.addEventListener('click', () => {
-    buttons.forEach(item => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active)); });
-    render();
-  }));
+  const activateButton = (buttons, button) => buttons.forEach(item => { const active = item === button; item.classList.toggle('active', active); item.setAttribute('aria-pressed', String(active)); });
+  categoryButtons.forEach(button => button.addEventListener('click', () => { activateButton(categoryButtons, button); render(); }));
+  brandButtons.forEach(button => button.addEventListener('click', () => { activateButton(brandButtons, button); render(); }));
   sort?.addEventListener('change', render);
   render();
 })();
