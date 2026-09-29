@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ms">
 <head>
+  <script>try{if(localStorage.getItem("emasTheme")==="dark")document.documentElement.dataset.theme="dark";}catch(e){}</script>
+  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Produk emas pilihan Emastracker.">
@@ -23,10 +25,15 @@
     .catalog-tools{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-top:28px;padding:14px 16px;border:1px solid #e5eaf1;border-radius:14px;background:rgba(255,255,255,.78);box-shadow:0 6px 18px rgba(42,55,72,.05)}
     .filter-toolbar{display:grid;gap:8px;min-width:0;flex:1 1 620px}.catalog-tool-label{display:block;color:#647083;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.filter-buttons{display:flex;flex-wrap:wrap;gap:7px}.filter-button{border:1px solid #dce3ec;border-radius:999px;padding:9px 13px;background:#fff;color:#526071;font:700 11px 'DM Sans',sans-serif;cursor:pointer;transition:.2s background,.2s color,.2s border-color,.2s transform}.filter-button:hover{transform:translateY(-1px);border-color:#c59027;color:#8b6217}.filter-button.active{border-color:#b98019;background:#b98019;color:#fff;box-shadow:0 5px 12px rgba(185,128,25,.2)}.sort-toolbar{display:grid;gap:8px;min-width:190px}.sort-toolbar select{border:1px solid #dce3ec;border-radius:9px;padding:9px 30px 9px 11px;background:#fff;color:#526071;font:700 11px 'DM Sans',sans-serif;cursor:pointer;outline:none}.sort-toolbar select:focus{border-color:#c59027;box-shadow:0 0 0 3px #f8edda}.catalog-count{align-self:center;margin-left:auto;color:#8792a0;font-size:11px;font-weight:600;white-space:nowrap}.catalog-card.is-filtered-out{display:none!important}.catalog-empty{margin:18px 0 0;padding:28px;border:1px dashed #d9e1eb;border-radius:14px;color:#6d7888;text-align:center;font-size:13px;background:#fff}.catalog-empty[hidden]{display:none}
     @media(max-width:640px){.catalog-tools{align-items:stretch;gap:14px;margin-top:22px;padding:13px}.filter-toolbar,.sort-toolbar{flex-basis:100%;min-width:0}.sort-toolbar select{width:100%}.catalog-count{margin-left:0;align-self:auto}}
-  </style>
+      .nav-tools{display:flex;align-items:center;gap:12px}.theme-button{border:0;background:#fbfaf7;color:var(--ink);width:42px;height:42px;border-radius:50%;display:grid;place-items:center;cursor:pointer;transition:.25s transform,.25s background}.theme-button:hover{transform:rotate(-8deg);background:#f5ead2}.theme-icon{width:18px;height:18px}.theme-icon-sun{display:none}html[data-theme="dark"] .theme-icon-moon{display:none}html[data-theme="dark"] .theme-icon-sun{display:block}
+    html[data-theme="dark"]{color-scheme:dark}html[data-theme="dark"] body{background:#101722;color:#edf2f7}html[data-theme="dark"] .nav{background:rgba(16,23,34,.96);border-color:#293647}html[data-theme="dark"] .brand-tag{color:#aab6c4}html[data-theme="dark"] .back{color:#e2b75b}html[data-theme="dark"] .theme-button{background:#1b2737;color:#edf2f7}html[data-theme="dark"] .theme-button:hover{background:#29394d}
+    html[data-theme="dark"] .page{background:#101722}html[data-theme="dark"] .catalog-card,html[data-theme="dark"] .catalog-tools,html[data-theme="dark"] .product-media,html[data-theme="dark"] .product-media img,html[data-theme="dark"] .catalog-empty{background:#172131;border-color:#2c3a4c;box-shadow:0 10px 28px rgba(0,0,0,.2)}html[data-theme="dark"] .copy,html[data-theme="dark"] .product-note,html[data-theme="dark"] .catalog-tool-label,html[data-theme="dark"] .catalog-count{color:#aab6c4}
+    html[data-theme="dark"] .filter-button,html[data-theme="dark"] .sort-toolbar select{background:#1b2737;border-color:#405064;color:#d5dee8}html[data-theme="dark"] .filter-button.active{background:#b98019;border-color:#d6a33d;color:#fff}html[data-theme="dark"] .empty{background:repeating-linear-gradient(135deg,rgba(61,76,94,.22) 0 8px,transparent 8px 16px);border-color:#405064}
+    @media(max-width:640px){.nav-tools{gap:8px}}
+</style>
 </head>
 <body>
-  <header class="nav"><div class="shell nav-inner"><a class="brand" href="index.html#utama" aria-label="Emastracker - halaman utama"><img class="brand-logo" src="emastracker-logo.jpg?v=1" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a><a class="back" href="index.html">← Kembali</a></div></header>
+  <header class="nav"><div class="shell nav-inner"><a class="brand" href="index.html#utama" aria-label="Emastracker - halaman utama"><img class="brand-logo" src="emastracker-logo.jpg?v=1" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a><div class="nav-tools"><button class="round-button theme-button" id="themeBtn" type="button" aria-label="Aktifkan mod gelap" aria-pressed="false"><svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 15.2A8.5 8.5 0 0 1 8.8 3.2 8.5 8.5 0 1 0 20.8 15.2Z"/></svg><svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button><a class="back" href="index.html">← Kembali</a></div></div></header>
   <main class="page"><div class="shell"><div class="eyebrow">Produk Pilihan</div><h1 class="title">Produk Emas</h1><p class="copy">Pilihan emas fizikal daripada Shopee. Klik gambar atau butang untuk melihat produk.</p><div class="catalog-tools" aria-label="Tapis dan susun produk">
       <div class="filter-toolbar">
         <span class="catalog-tool-label">Tapis kategori</span>
@@ -205,5 +212,14 @@
   render();
 })();
 </script>
+<script>
+    (() => {
+      const root=document.documentElement,button=document.getElementById("themeBtn");
+      if(!button)return;
+      const sync=()=>{const dark=root.dataset.theme==="dark";button.setAttribute("aria-pressed",String(dark));button.setAttribute("aria-label",dark?"Aktifkan mod terang":"Aktifkan mod gelap");};
+      sync();
+      button.addEventListener("click",()=>{const dark=root.dataset.theme==="dark";if(dark)delete root.dataset.theme;else root.dataset.theme="dark";try{localStorage.setItem("emasTheme",dark?"light":"dark");}catch(e){}sync();});
+    })();
+  </script>
 </body>
 </html>
