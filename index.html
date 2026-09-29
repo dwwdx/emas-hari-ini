@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ms">
 <head>
+  <script>try{if(localStorage.getItem("emasTheme")==="dark")document.documentElement.dataset.theme="dark";}catch(e){}</script>
+  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Harga emas Malaysia semasa, carta harga dan kalkulator emas.">
@@ -62,7 +64,7 @@
     .product-feature{display:grid;grid-template-columns:180px minmax(0,1fr);gap:24px;align-items:center;margin-top:28px;padding:20px;background:linear-gradient(135deg,#fffdf8,#fff);border:1px solid #eee7d9;border-radius:20px;box-shadow:0 12px 30px rgba(42,35,20,.08)}.product-feature-media{display:block;padding:8px;background:#fff;border:1px solid #eee7d9;border-radius:16px;text-decoration:none}.product-feature-media img{display:block;width:100%;aspect-ratio:1;object-fit:contain;border-radius:11px}.product-feature-kicker{color:#9b6c13;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.product-feature-title{margin:7px 0 8px;font:800 24px/1.15 'Manrope',sans-serif;letter-spacing:-.04em}.product-feature-desc{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.product-feature-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:16px}.product-feature-bottom strong{color:#b47b13;font:800 22px/1 'Manrope',sans-serif}.product-feature-link{display:inline-flex;align-items:center;gap:7px;color:#9b6c13;font-size:12px;font-weight:800;text-decoration:none}.product-feature-link:hover{text-decoration:underline}
     @media(max-width:640px){.product-feature{grid-template-columns:1fr;gap:16px}.product-feature-media{width:180px}.product-feature-title{font-size:22px}.product-feature-bottom{align-items:flex-start;flex-direction:column;gap:12px}}
     @media(max-width:640px){
-      .shell{width:min(100% - 28px,1180px)}.brand-logo{width:48px;height:48px;border-radius:14px;object-fit:cover;overflow:hidden;box-shadow:0 3px 10px rgba(161,112,23,.16);}.nav .round-button:not(.menu-button){display:none}
+      .shell{width:min(100% - 28px,1180px)}.brand-logo{width:48px;height:48px;border-radius:14px;object-fit:cover;overflow:hidden;box-shadow:0 3px 10px rgba(161,112,23,.16);}.nav .round-button#searchBtn{display:none}
       .hero{padding:34px 0 76px}h1{font-size:40px}.hero-copy{font-size:14px}.hero-visual{min-height:560px;margin:0}.gold-scene{height:220px;border-radius:21px}.live-panels{left:0;right:0;top:180px;bottom:auto;grid-template-columns:1fr}.price-card,.chart-card{padding:16px}.chart-wrap{height:115px}
       .market{padding-top:28px}.market-bar{display:block}.market-label{padding:14px 16px;border-bottom:1px solid #eeeae1}.ticker{grid-template-columns:1fr 1fr}.tick{border-bottom:1px solid #eeeae1}.features{padding-top:12px}.feature-grid{grid-template-columns:1fr}.feature:last-child{grid-column:auto}.feature{min-height:0}.section-row{align-items:flex-start;flex-direction:column}.outline-button{display:inline-flex;align-self:flex-start}.empty-section{padding:38px 0}.empty-space{height:110px}.footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}.footer-brand{grid-column:1/-1}.footer-bottom{display:block;line-height:1.7}.footer-bottom span:last-child{display:block;margin-top:7px}
     }
@@ -82,7 +84,19 @@
   
     /* Keep the homepage rail fixed at seven featured products. */
     .home-product-rail > .product-feature:nth-child(n+8){display:none!important}
-  </style>
+      .theme-button{position:relative}.theme-icon{width:18px;height:18px}.theme-icon-sun{display:none}html[data-theme="dark"] .theme-icon-moon{display:none}html[data-theme="dark"] .theme-icon-sun{display:block}
+    html[data-theme="dark"]{color-scheme:dark}html[data-theme="dark"] body{background:#101722;color:#edf2f7}
+    html[data-theme="dark"] .nav{background:rgba(16,23,34,.96);border-color:#293647}html[data-theme="dark"] .nav-links{background:#101722;border-color:#293647}html[data-theme="dark"] .nav-links a{color:#d9e1ea}html[data-theme="dark"] .nav-links a:hover,html[data-theme="dark"] .nav-links a.active{color:#e2b75b}html[data-theme="dark"] .round-button{background:#1b2737;color:#edf2f7}html[data-theme="dark"] .round-button:hover{background:#29394d}
+    html[data-theme="dark"] .hero{background:radial-gradient(circle at 78% 18%,rgba(145,103,25,.24),transparent 24%),linear-gradient(105deg,#101722 0%,#172231 56%,#263447 100%)}html[data-theme="dark"] .hero-copy{color:#b8c2ce}
+    html[data-theme="dark"] .live-panels .price-card,html[data-theme="dark"] .live-panels .chart-card,html[data-theme="dark"] .market-bar,html[data-theme="dark"] .feature,html[data-theme="dark"] .ad-carousel,html[data-theme="dark"] .product-feature{background:#172131;border-color:#2c3a4c;box-shadow:0 10px 28px rgba(0,0,0,.2)}
+    html[data-theme="dark"] .market,html[data-theme="dark"] .ad-section{background:#101722}html[data-theme="dark"] .empty-section{background:linear-gradient(180deg,#172131,#101722)}html[data-theme="dark"] footer{background:#0d141e;border-color:#293647}
+    html[data-theme="dark"] .section-copy,html[data-theme="dark"] .feature p,html[data-theme="dark"] .per,html[data-theme="dark"] .update-row,html[data-theme="dark"] .footer-nav,html[data-theme="dark"] .source-text,html[data-theme="dark"] .brand-tag{color:#aab6c4}
+    html[data-theme="dark"] .price-unit+.price-unit,html[data-theme="dark"] .update-row,html[data-theme="dark"] .tick,html[data-theme="dark"] .market-label{border-color:#2c3a4c}
+    html[data-theme="dark"] .ad-slot,html[data-theme="dark"] .empty-space{background:#121c29;border-color:#3b4a5e}html[data-theme="dark"] .outline-button{background:#1b2737;border-color:#405064;color:#e2b75b}
+    html[data-theme="dark"] .modal-box,html[data-theme="dark"] .search-panel{background:#172131;color:#edf2f7}html[data-theme="dark"] .field input,html[data-theme="dark"] .field select,html[data-theme="dark"] .search-inner input{background:#101722;border-color:#405064;color:#edf2f7}html[data-theme="dark"] .close{background:#263548;color:#edf2f7}
+    html[data-theme="dark"] .ad-dot{background:#405064}html[data-theme="dark"] .ad-dot.active{background:#d6a33d}
+    @media(max-width:940px){html[data-theme="dark"] .nav-links{background:#101722}}
+</style>
 </head>
 <body>
   <header class="nav">
@@ -96,6 +110,7 @@
       </nav>
       <div class="nav-actions">
         <button class="round-button" id="searchBtn" aria-label="Buka carian"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+        <button class="round-button theme-button" id="themeBtn" type="button" aria-label="Aktifkan mod gelap" aria-pressed="false"><svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 15.2A8.5 8.5 0 0 1 8.8 3.2 8.5 8.5 0 1 0 20.8 15.2Z"/></svg><svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
         <button class="round-button menu-button" id="menuBtn" aria-label="Buka menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
     </div>
@@ -388,6 +403,15 @@
       track.addEventListener("touchend", start, { passive: true });
       window.addEventListener("resize", () => goTo(current));
       start();
+    })();
+  </script>
+<script>
+    (() => {
+      const root=document.documentElement,button=document.getElementById("themeBtn");
+      if(!button)return;
+      const sync=()=>{const dark=root.dataset.theme==="dark";button.setAttribute("aria-pressed",String(dark));button.setAttribute("aria-label",dark?"Aktifkan mod terang":"Aktifkan mod gelap");};
+      sync();
+      button.addEventListener("click",()=>{const dark=root.dataset.theme==="dark";if(dark)delete root.dataset.theme;else root.dataset.theme="dark";try{localStorage.setItem("emasTheme",dark?"light":"dark");}catch(e){}sync();});
     })();
   </script>
 </body>
