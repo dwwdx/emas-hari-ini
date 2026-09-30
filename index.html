@@ -47,7 +47,12 @@
     .ad-carousel{border:1px solid #eee9df;border-radius:14px;background:#fffdf9;padding:10px;box-shadow:0 8px 24px rgba(31,35,41,.035)}
     .ad-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
     .ad-track::-webkit-scrollbar{display:none}
-    .ad-slot{flex:0 0 100%;min-height:138px;border:1px dashed #e3dccd;border-radius:10px;background:#fcfbf8;scroll-snap-align:start}
+    .ad-slot{flex:0 0 100%;min-height:138px;border:0;border-radius:10px;background:transparent;scroll-snap-align:start;overflow:hidden}
+    .ad-card{height:100%;min-height:138px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:12px;padding:16px 18px;border-radius:10px;overflow:hidden;color:#172235;text-decoration:none;position:relative}
+    .ad-card--habib{background:#f3e5c5}.ad-card--tomei{background:#dce9e7}.ad-card--masdora{background:#e7ded2}.ad-card--wing{background:#ead7b9}
+    .ad-card-copy{min-width:0}.ad-kicker{display:block;margin-bottom:7px;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.72}.ad-card-title{margin:0;font:800 clamp(17px,2.2vw,24px)/1.08 Manrope,sans-serif;letter-spacing:-.04em}.ad-card-note{margin:7px 0 12px;font-size:11px;line-height:1.35;opacity:.76}.ad-card-cta{display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;background:#172235;color:#fff;font-size:10px;font-weight:800}.ad-card-visual{height:106px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.52);padding:7px}.ad-card-visual img{display:block;max-width:100%;max-height:100%;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 8px 9px rgba(35,28,16,.16))}
+    html[data-theme="dark"] .ad-card--habib{background:#695a3c;color:#fff8e9}.ad-card--tomei{color:#142b2b}.ad-card--masdora{color:#30281f}.ad-card--wing{color:#382615}.ad-card--habib .ad-card-cta{background:#fff8e9;color:#4d3a18}
+    @media(max-width:520px){.ad-card{grid-template-columns:1.08fr .92fr;padding:14px}.ad-card-title{font-size:17px}.ad-card-note{font-size:10px;margin-bottom:9px}.ad-card-visual{height:100px}}
     .ad-controls{display:flex;justify-content:center;gap:6px;padding:10px 0 1px}
     .ad-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#ded8ca;cursor:pointer;transition:.2s transform,.2s background}
     .ad-dot.active{background:#b98019;transform:scale(1.25)}
@@ -158,10 +163,10 @@
     <div class="shell">
       <div class="ad-carousel" aria-label="Carousel iklan">
         <div class="ad-track" data-ad-track>
-          <div class="ad-slot" data-ad-slot="0" role="group" aria-label="Slot iklan 1 kosong"></div>
-          <div class="ad-slot" data-ad-slot="1" role="group" aria-label="Slot iklan 2 kosong"></div>
-          <div class="ad-slot" data-ad-slot="2" role="group" aria-label="Slot iklan 3 kosong"></div>
-          <div class="ad-slot" data-ad-slot="3" role="group" aria-label="Slot iklan 4 kosong"></div>
+          <div class="ad-slot" data-ad-slot="0" role="group" aria-label="Promosi HABIB gold bar 999"><a class="ad-card ad-card--habib" href="https://s.shopee.com.my/1Lg5migCCu" target="_blank" rel="noopener noreferrer"><div class="ad-card-copy"><span class="ad-kicker">Emas 999 • 1 gram</span><h3 class="ad-card-title">Gold bar untuk simpanan</h3><p class="ad-card-note">Ringkas, padat dan mudah disimpan.</p><span class="ad-card-cta">Lihat tawaran →</span></div><div class="ad-card-visual"><img src="./habib-gold-bar.jpg?v=2" alt="Gold bar HABIB 999 1 gram" loading="lazy"></div></a></div>
+          <div class="ad-slot" data-ad-slot="1" role="group" aria-label="Promosi TOMEI gold bar 2 gram"><a class="ad-card ad-card--tomei" href="https://s.shopee.com.my/9fLDl7r8oj" target="_blank" rel="noopener noreferrer"><div class="ad-card-copy"><span class="ad-kicker">Fine gold 9999 • 2 gram</span><h3 class="ad-card-title">Simpanan dengan gaya</h3><p class="ad-card-note">Rekaan ikonik untuk koleksi emas.</p><span class="ad-card-cta">Lihat tawaran →</span></div><div class="ad-card-visual"><img src="./tomei-twin-towers-gold-bar.jpg?v=2" alt="TOMEI Twin Towers gold bar 2 gram" loading="lazy"></div></a></div>
+          <div class="ad-slot" data-ad-slot="2" role="group" aria-label="Promosi MASDORA gold bar 2.5 gram"><a class="ad-card ad-card--masdora" href="https://s.shopee.com.my/70KSfXvNMm" target="_blank" rel="noopener noreferrer"><div class="ad-card-copy"><span class="ad-kicker">Emas 999.9 • 2.5 gram</span><h3 class="ad-card-title">Emas dengan cerita</h3><p class="ad-card-note">Koleksi bertema Kuala Lumpur.</p><span class="ad-card-cta">Lihat tawaran →</span></div><div class="ad-card-visual"><img src="./masdora-kuala-lumpur-2-5gm-gold-bar.jpg?v=2" alt="MASDORA gold bar Kuala Lumpur 2.5 gram" loading="lazy"></div></a></div>
+          <div class="ad-slot" data-ad-slot="3" role="group" aria-label="Promosi gelang Wing Sing emas 916"><a class="ad-card ad-card--wing" href="https://s.shopee.com.my/7ptZuAsgtf" target="_blank" rel="noopener noreferrer"><div class="ad-card-copy"><span class="ad-kicker">Emas 916 • Barang kemas</span><h3 class="ad-card-title">Gaya harian yang bersinar</h3><p class="ad-card-note">Pilihan gelang untuk dipakai setiap hari.</p><span class="ad-card-cta">Lihat tawaran →</span></div><div class="ad-card-visual"><img src="./wing-sing-love-emas-916.jpg?v=3" alt="Gelang Wing Sing emas 916" loading="lazy"></div></a></div>
         </div>
         <div class="ad-controls" aria-label="Pilih slot iklan">
           <button class="ad-dot active" type="button" data-ad-dot="0" aria-label="Lihat slot iklan 1" aria-current="true"></button>
