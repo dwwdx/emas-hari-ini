@@ -326,7 +326,13 @@
 
     function addPoint(time,value){
       try{state.points=JSON.parse(localStorage.getItem('emasHariniPoints')||'[]');}catch{state.points=[];}
-      state.function drawChart(){
+      state.points=Array.isArray(state.points)?state.points.filter(p=>Number.isFinite(p.time)&&Number.isFinite(p.value)):[];
+      if(!state.points.some(p=>p.time===time))state.points.push({time,value});
+      state.points=state.points.filter(p=>Date.now()-p.time<7*86400000).sort((a,b)=>a.time-b.time).slice(-144);
+      try{localStorage.setItem('emasHariniPoints',JSON.stringify(state.points));}catch{}
+      drawChart();
+    }
+    function drawChart(){
       const canvas=$('goldChart'), box=canvas.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
       const w=box.width,h=box.height;canvas.width=Math.max(1,w*dpr);canvas.height=Math.max(1,h*dpr);
       const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
@@ -372,12 +378,7 @@
       const maxLeft=Math.max(8,wrap.clientWidth-tooltip.offsetWidth-8),left=Math.max(8,Math.min(maxLeft,nearest.x-tooltip.offsetWidth/2)),top=Math.max(4,nearest.y-tooltip.offsetHeight-10);
       tooltip.style.left=left+'px';tooltip.style.top=top+'px';
     }
-
-    umpur'}).format(new Date(t));
-      ctx.fillStyle='#8b929b';ctx.font="8px 'DM Sans'";ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText(formatTime(points[0].time),pad.l,h);ctx.textAlign='right';ctx.fillText(formatTime(lastPoint.time),w-pad.r,h);
-      ctx.fillStyle=lineColor;ctx.font="800 9px 'Manrope'";ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText(money(lastPoint.value),w-pad.r,pad.t+2);
-    }
-    function updateCalculator(){
+function updateCalculator(){
       const weight=Math.max(0,Number($('weight').value)||0),is916=$('purity').value.includes('916');
       const rate=is916?state.price916:state.price999;
       $('calcResult').textContent=rate?money(weight*rate):'Menunggu harga langsung…';
