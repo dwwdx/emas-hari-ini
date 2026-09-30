@@ -45,7 +45,7 @@
     .market{background:#fff;padding:48px 0 22px}.market-bar{min-height:52px;border:1px solid #eeeae1;border-radius:10px;box-shadow:0 6px 20px rgba(36,39,43,.04);display:flex;align-items:center;overflow:hidden}.market-label{display:flex;align-items:center;gap:9px;padding:0 20px;font-size:12px;font-weight:800;color:#956d20;white-space:nowrap}.market-label svg{width:16px}.ticker{flex:1;display:grid;grid-template-columns:repeat(4,1fr)}.tick{padding:0 19px;border-left:1px solid #eeeae1;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10px}.tick strong{font-size:10px}.tick-value{color:#a9781b;font-weight:700}.skeleton-text{display:inline-block;width:50px;height:7px;border-radius:9px;background:linear-gradient(90deg,#ede8dd,#fbf8f1,#ede8dd);background-size:200%;animation:shimmer 1.5s infinite}@keyframes shimmer{to{background-position:-200%}}
     .ad-section{padding:0 0 16px;background:#fff}
     .ad-carousel{border:1px solid #eee9df;border-radius:14px;background:#fffdf9;padding:10px;box-shadow:0 8px 24px rgba(31,35,41,.035)}
-    .ad-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+    .ad-track{display:flex;gap:12px;overflow:hidden;touch-action:pan-y;user-select:none;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
     .ad-track::-webkit-scrollbar{display:none}
     .ad-slot{flex:0 0 100%;min-height:138px;border:0;border-radius:10px;background:transparent;scroll-snap-align:start;overflow:hidden}
     .ad-card{height:100%;min-height:138px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:12px;padding:16px 18px;border-radius:10px;overflow:hidden;color:#172235;text-decoration:none;position:relative}
@@ -400,12 +400,8 @@
         setActive(current);
       };
       const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
-      const start = () => { stop(); timer = setInterval(() => goTo(current + 1), 5500); };
+      const start = () => { stop(); timer = setInterval(() => goTo(current + 1), 3500); };
       dots.forEach((dot, index) => dot.addEventListener("click", () => { goTo(index); start(); }));
-      track.addEventListener("mouseenter", stop);
-      track.addEventListener("mouseleave", start);
-      track.addEventListener("touchstart", stop, { passive: true });
-      track.addEventListener("touchend", start, { passive: true });
       window.addEventListener("resize", () => goTo(current));
       start();
     })();
