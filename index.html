@@ -6,6 +6,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Harga emas Malaysia semasa, carta harga dan kalkulator emas.">
+  <meta name="theme-color" content="#10213a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Emastracker">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="./emastracker-logo.jpg">
+  <link rel="manifest" href="./manifest.webmanifest">
   <title>Emastracker — Harga Emas Malaysia Hari Ini</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
@@ -312,7 +318,9 @@
       state.lastChecked=Date.now();
       const delayed=sourceIsStale(data)||Boolean(data.servedFromCache)||fromDevice;
       $('lastUpdate').textContent=delayed
-        ? `Bacaan terakhir · sumber ${sourceTime}`
+        ? (fromDevice || sourceIsStale(data)
+          ? `Harga tersimpan · mungkin lapuk · sumber ${sourceTime}`
+          : `Bacaan terakhir · sumber ${sourceTime}`)
         : `Sumber ${sourceTime} · disemak sekarang`;
       $('statusDot').classList.toggle('live',!delayed);
       addPoint(observedTime,state.price999);
@@ -394,7 +402,8 @@ function updateCalculator(){
     $('refreshPrice').addEventListener('click',()=>fetchGoldPrice(true));
     const chartCanvas=$('goldChart');chartCanvas.addEventListener('pointermove',showChartTooltip);chartCanvas.addEventListener('pointerdown',showChartTooltip);chartCanvas.addEventListener('pointerleave',hideChartTooltip);chartCanvas.addEventListener('pointercancel',hideChartTooltip);
     window.addEventListener('online',()=>fetchGoldPrice(true));window.addEventListener('resize',drawChart);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-state.lastChecked>120000)fetchGoldPrice(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
-    fetchGoldPrice().then(()=>{if(!state.price999)restoreSavedPrice();});
+    restoreSavedPrice();
+    fetchGoldPrice();
   </script>
   <script>
     (() => {
@@ -431,6 +440,13 @@ function updateCalculator(){
       sync();
       button.addEventListener("click",()=>{const dark=root.dataset.theme==="dark";if(dark)delete root.dataset.theme;else root.dataset.theme="dark";try{localStorage.setItem("emasTheme",dark?"light":"dark");}catch(e){}sync();});
     })();
+  </script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      });
+    }
   </script>
 </body>
 </html>

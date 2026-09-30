@@ -1,0 +1,25 @@
+{
+  "name": "Emastracker — Harga Emas Malaysia",
+  "short_name": "Emastracker",
+  "description": "Rujukan harga emas Malaysia, carta dan kalkulator.",
+  "lang": "ms-MY",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbf8f1",
+  "theme_color": "#10213a",
+  "icons": [
+    {
+      "src": "./logo-emasharini.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./emastracker-logo.jpg",
+      "sizes": "1254x1254",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
