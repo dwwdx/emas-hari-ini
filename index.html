@@ -349,7 +349,7 @@
         const y=pad.t+i*plotH/2,value=max-i*(max-min)/2;ctx.strokeStyle='#ece6da';ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#8b929b';ctx.fillText('RM'+value.toFixed(2),pad.l-6,y);
       }
       const curvePath=()=>{const path=[];path.push(['M',points[0].x,points[0].y]);for(let i=1;i<points.length;i++){const prev=points[i-1],curr=points[i],mid=(prev.x+curr.x)/2;path.push(['Q',prev.x,prev.y,mid,(prev.y+curr.y)/2]);}if(points.length>1){const lastPoint=points[points.length-1],prev=points[points.length-2];path.push(['Q',prev.x+(lastPoint.x-prev.x)/2,(prev.y+lastPoint.y)/2,lastPoint.x,lastPoint.y]);}return path;};
-      const trace=(path)=>{ctx.beginPath();for(const part of path){if(part[0]==='M')ctx.moveTo(part[1],part[2]);else ctx.quadraticCurveTo(part[1],part[2],part[3],part[4]);};
+      const trace=(path)=>{ctx.beginPath();for(const part of path){if(part[0]==='M')ctx.moveTo(part[1],part[2]);else ctx.quadraticCurveTo(part[1],part[2],part[3],part[4]);}};
       if(points.length>1){
         const path=curvePath();trace(path);ctx.lineTo(points.at(-1).x,h-pad.b);ctx.lineTo(points[0].x,h-pad.b);ctx.closePath();const fill=ctx.createLinearGradient(0,pad.t,0,h-pad.b);fill.addColorStop(0,goingUp?'rgba(45,150,105,.26)':'rgba(187,128,23,.25)');fill.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=fill;ctx.fill();
         trace(path);ctx.strokeStyle=lineColor;ctx.lineWidth=2.4;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
