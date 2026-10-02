@@ -35,16 +35,47 @@
     .contents{padding:30px 0 86px}.catalog-heading{margin:0 0 20px}.catalog-heading .section-heading{margin:0;font:800 clamp(28px,4vw,36px)/1.12 'Manrope',sans-serif;letter-spacing:-.045em}.contents-grid{margin-top:0;gap:16px}.contents-card{min-height:164px}
     @media(max-width:640px){.contents{padding-top:24px}.catalog-heading{margin-bottom:16px}.contents-grid{gap:12px}}
   
+  
+    /* Compact article rows and pagination */
+    .contents{padding:24px 0 64px}
+    .contents-grid{grid-template-columns:1fr;gap:10px}
+    .contents-card{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto;align-items:center;column-gap:18px;padding:13px 18px;border-radius:13px}
+    .contents-card[hidden]{display:none!important}
+    .contents-num{grid-column:1;grid-row:1;margin:0 0 3px;line-height:1.2}
+    .contents-title{grid-column:1;grid-row:2;min-width:0;font-size:15px;line-height:1.3}
+    .contents-desc{grid-column:1;grid-row:3;min-width:0;margin-top:3px;font-size:12px;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .contents-link{grid-column:2;grid-row:1 / span 3;display:flex;align-items:center;gap:9px;margin:0;padding:0;color:#8e651a;font-size:11px;font-weight:700;white-space:nowrap}
+    .contents-time{color:var(--muted);font-size:11px;font-weight:600}
+    .contents-arrow{display:grid;place-items:center;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;font-size:18px;line-height:1;color:#8e651a}
+    .contents-card:hover .contents-arrow{border-color:#d5bb81;background:#fbf7eb}
+    .article-pagination{display:flex;justify-content:center;align-items:center;gap:7px;margin:22px auto 0}
+    .article-pagination[hidden]{display:none!important}
+    .pagination-button,.pagination-arrow{display:grid;place-items:center;min-width:36px;height:36px;padding:0 9px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font:700 12px 'DM Sans',sans-serif;cursor:pointer}
+    .pagination-button[aria-current="page"]{border-color:var(--ink);background:var(--ink);color:#fff}
+    .pagination-button:hover:not([aria-current="page"]),.pagination-arrow:hover:not(:disabled){border-color:#d5bb81;background:#fbf7eb}
+    .pagination-arrow:disabled{opacity:.4;cursor:not-allowed}
+    .pagination-gap{min-width:14px;text-align:center;color:var(--muted);font-size:12px}
+    html[data-theme="dark"] .contents-arrow{color:#e2b75b;border-color:#3a485a}
+    html[data-theme="dark"] .contents-card:hover .contents-arrow,html[data-theme="dark"] .pagination-button:hover:not([aria-current="page"]),html[data-theme="dark"] .pagination-arrow:hover:not(:disabled){background:#202b3a;border-color:#6e5b35}
+    html[data-theme="dark"] .pagination-button,html[data-theme="dark"] .pagination-arrow{background:#172131;color:#edf2f7;border-color:#344256}
+    html[data-theme="dark"] .pagination-button[aria-current="page"]{background:#e2b75b;border-color:#e2b75b;color:#172131}
+    @media(max-width:640px){
+      .contents{padding:22px 0 52px}.catalog-heading{margin-bottom:14px}.contents-grid{gap:9px}
+      .contents-card{column-gap:10px;padding:12px 13px}.contents-title{font-size:14px}.contents-desc{font-size:11px}
+      .contents-link{gap:7px;font-size:10px}.contents-time{font-size:10px}.contents-arrow{width:27px;height:27px}
+      .article-pagination{gap:5px;margin-top:18px}.pagination-button,.pagination-arrow{min-width:34px;height:34px;padding:0 7px}
+    }
+
   </style>
 </head>
 <body>
   <header class="nav"><div class="shell nav-inner"><a class="brand" href="index.html#utama" aria-label="Emastracker - halaman utama"><img class="brand-logo" src="emastracker-logo.jpg?v=1" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a><div class="nav-tools"><button class="theme-button" id="themeBtn" type="button" aria-label="Aktifkan mod gelap" aria-pressed="false"><svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 15.2A8.5 8.5 0 0 1 8.8 3.2 8.5 8.5 0 1 0 20.8 15.2Z"/></svg><svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button><a class="back" id="articleBackLink" href="index.html">← Kembali</a></div></div></header>
   <main>
     <section class="contents" id="semua-artikel"><div class="shell"><div class="catalog-heading"><h1 class="section-heading">Semua artikel</h1></div><div class="contents-grid">
-      <a class="contents-card" href="./artikel.html?artikel=mula-simpan-emas"><span class="contents-num">01 · Asas simpanan</span><span class="contents-title">Mula menyimpan emas</span><span class="contents-desc">Tak perlu bermula dengan jumlah besar. Yang penting, tahu tujuan, mampu menanggung kos dan tahu bagaimana anda akan menjualnya semula.</span><span class="contents-link">Baca artikel <span aria-hidden="true">→</span></span></a>
-      <a class="contents-card" href="./artikel.html?artikel=emas-999-916"><span class="contents-num">02 · Ketulenan</span><span class="contents-title">Emas 999 atau 916?</span><span class="contents-desc">Nombor pada emas menunjukkan berapa banyak kandungan emas tulen dalam aloi. Ia membantu anda membandingkan produk, tetapi bukan harga akhir yang kedai akan tawarkan.</span><span class="contents-link">Baca artikel <span aria-hidden="true">→</span></span></a>
-      <a class="contents-card" href="./artikel.html?artikel=jual-emas"><span class="contents-num">03 · Jual semula</span><span class="contents-title">Semak harga buyback</span><span class="contents-desc">Harga jualan hari ini bukan semestinya jumlah yang anda terima apabila menjual semula. Minta kiraan penuh untuk barang dan ketulenan yang sama.</span><span class="contents-link">Baca artikel <span aria-hidden="true">→</span></span></a>
-    </div></div></section>
+      <a class="contents-card" href="./artikel.html?artikel=mula-simpan-emas"><span class="contents-num">01 · Asas simpanan</span><span class="contents-title">Mula menyimpan emas</span><span class="contents-desc">Tak perlu bermula dengan jumlah besar. Yang penting, tahu tujuan, mampu menanggung kos dan tahu bagaimana anda akan menjualnya semula.</span><span class="contents-link"><span class="contents-time">3 min baca</span><span class="contents-arrow" aria-hidden="true">→</span></span></a>
+      <a class="contents-card" href="./artikel.html?artikel=emas-999-916"><span class="contents-num">02 · Ketulenan</span><span class="contents-title">Emas 999 atau 916?</span><span class="contents-desc">Nombor pada emas menunjukkan berapa banyak kandungan emas tulen dalam aloi. Ia membantu anda membandingkan produk, tetapi bukan harga akhir yang kedai akan tawarkan.</span><span class="contents-link"><span class="contents-time">3 min baca</span><span class="contents-arrow" aria-hidden="true">→</span></span></a>
+      <a class="contents-card" href="./artikel.html?artikel=jual-emas"><span class="contents-num">03 · Jual semula</span><span class="contents-title">Semak harga buyback</span><span class="contents-desc">Harga jualan hari ini bukan semestinya jumlah yang anda terima apabila menjual semula. Minta kiraan penuh untuk barang dan ketulenan yang sama.</span><span class="contents-link"><span class="contents-time">3 min baca</span><span class="contents-arrow" aria-hidden="true">→</span></span></a>
+    </div><nav class="article-pagination" id="articlePagination" aria-label="Halaman artikel" hidden></nav></div></section>
     <section class="guides" hidden><div class="shell">
       <article class="guide" id="mula-simpan-emas"><header class="guide-head"><div class="guide-kicker">01 · Asas simpanan</div><h2>Mula menyimpan emas: pelan kecil yang boleh dikekalkan</h2><p class="guide-lead">Tak perlu bermula dengan jumlah besar. Yang penting, tahu tujuan, mampu menanggung kos dan tahu bagaimana anda akan menjualnya semula.</p><span class="reading-time">Anggaran 3 minit bacaan</span></header><div class="guide-body">
         <p>Emas sering dianggap sebagai cara menyimpan nilai, tetapi harganya tetap berubah. Ia bukan wang tunai yang boleh digunakan serta-merta tanpa kos, dan kenaikan harga pada masa depan tidak dijamin. Sebelum membeli, tentukan dahulu sebab anda mahu memegang emas: simpanan jangka panjang, hadiah, atau barang kemas untuk dipakai.</p>
@@ -76,7 +107,102 @@
   </main>
   <footer class="footer"><div class="shell footer-inner"><span>© 2026 Emastracker · Harga · Info · Panduan</span><a href="index.html">Kembali ke halaman utama ↑</a></div></footer>
 
-  <script>(()=>{const guides=[...document.querySelectorAll(".guide")];const selectedId=new URLSearchParams(window.location.search).get("artikel");const selected=guides.find(guide=>guide.id===selectedId);const hero=document.querySelector(".hero"),catalog=document.querySelector(".contents"),reading=document.querySelector(".guides"),back=document.getElementById("articleBackLink");if(hero)hero.hidden=Boolean(selected);catalog.hidden=Boolean(selected);reading.hidden=!selected;guides.forEach(guide=>{guide.hidden=guide!==selected;});if(selected){const title=selected.querySelector("h2")?.textContent?.trim()||"Panduan emas";const description=selected.querySelector(".guide-lead")?.textContent?.trim()||title;document.title=title+" — Emastracker";document.querySelector('meta[name="description"]')?.setAttribute("content",description);document.querySelector('meta[property="og:title"]')?.setAttribute("content",title+" — Emastracker");document.querySelector('meta[property="og:description"]')?.setAttribute("content",description);back.href="artikel.html";back.textContent="← Semua artikel";}})();</script>
+  <script>
+  (() => {
+    const guides = [...document.querySelectorAll(".guide")];
+    const cards = [...document.querySelectorAll(".contents-card")];
+    const selectedId = new URLSearchParams(window.location.search).get("artikel");
+    const selected = guides.find(guide => guide.id === selectedId);
+    const hero = document.querySelector(".hero");
+    const catalog = document.querySelector(".contents");
+    const reading = document.querySelector(".guides");
+    const pagination = document.getElementById("articlePagination");
+    const back = document.getElementById("articleBackLink");
+    const pageSize = 7;
+    let currentPage = 1;
+
+    if (hero) hero.hidden = Boolean(selected);
+    if (catalog) catalog.hidden = Boolean(selected);
+    if (reading) reading.hidden = !selected;
+    guides.forEach(guide => { guide.hidden = guide !== selected; });
+
+    const goToPage = page => {
+      const pageCount = Math.ceil(cards.length / pageSize);
+      currentPage = Math.min(Math.max(page, 1), Math.max(1, pageCount));
+      renderPagination();
+      catalog?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    function renderPagination() {
+      const pageCount = Math.ceil(cards.length / pageSize);
+      const firstVisible = (currentPage - 1) * pageSize;
+      cards.forEach((card, index) => {
+        card.hidden = Boolean(selected) || index < firstVisible || index >= firstVisible + pageSize;
+      });
+      if (!pagination) return;
+      pagination.replaceChildren();
+      if (selected || pageCount <= 1) {
+        pagination.hidden = true;
+        return;
+      }
+      pagination.hidden = false;
+
+      const addArrow = (label, text, target, disabled) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "pagination-arrow";
+        button.textContent = text;
+        button.setAttribute("aria-label", label);
+        button.disabled = disabled;
+        button.addEventListener("click", () => goToPage(target));
+        pagination.append(button);
+      };
+      const addPage = page => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "pagination-button";
+        button.textContent = String(page);
+        button.setAttribute("aria-label", "Halaman " + page);
+        if (page === currentPage) button.setAttribute("aria-current", "page");
+        button.addEventListener("click", () => goToPage(page));
+        pagination.append(button);
+      };
+      const addGap = () => {
+        const gap = document.createElement("span");
+        gap.className = "pagination-gap";
+        gap.textContent = "…";
+        gap.setAttribute("aria-hidden", "true");
+        pagination.append(gap);
+      };
+
+      addArrow("Halaman sebelumnya", "←", currentPage - 1, currentPage === 1);
+      if (pageCount <= 7) {
+        for (let page = 1; page <= pageCount; page++) addPage(page);
+      } else {
+        addPage(1);
+        const start = Math.max(2, currentPage - 2);
+        const end = Math.min(pageCount - 1, currentPage + 2);
+        if (start > 2) addGap();
+        for (let page = start; page <= end; page++) addPage(page);
+        if (end < pageCount - 1) addGap();
+        addPage(pageCount);
+      }
+      addArrow("Halaman seterusnya", "→", currentPage + 1, currentPage === pageCount);
+    }
+
+    renderPagination();
+    if (selected) {
+      const title = selected.querySelector("h2")?.textContent?.trim() || "Panduan emas";
+      const description = selected.querySelector(".guide-lead")?.textContent?.trim() || title;
+      document.title = title + " — Emastracker";
+      document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+      document.querySelector('meta[property="og:title"]')?.setAttribute("content", title + " — Emastracker");
+      document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+      back.href = "artikel.html";
+      back.textContent = "← Semua artikel";
+    }
+  })();
+</script>
   <script>(()=>{const root=document.documentElement,button=document.getElementById("themeBtn");if(!button)return;const sync=()=>{const dark=root.dataset.theme==="dark";button.setAttribute("aria-pressed",String(dark));button.setAttribute("aria-label",dark?"Aktifkan mod terang":"Aktifkan mod gelap");};sync();button.addEventListener("click",()=>{const dark=root.dataset.theme==="dark";if(dark)delete root.dataset.theme;else root.dataset.theme="dark";try{localStorage.setItem("emasTheme",dark?"light":"dark");}catch(e){}sync();});})();</script>
   <script>if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("./service-worker.js").catch(()=>{});});}</script>
 </body>
