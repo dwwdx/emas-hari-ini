@@ -138,7 +138,16 @@
     html[data-theme="dark"] .article-card-top,html[data-theme="dark"] .article-card-link{color:#e2b75b}
     @media(max-width:640px){.article-card{flex-basis:min(100%,280px);min-height:166px;padding:15px}}
   
-</style>
+
+    /* Make each homepage news card a single, full-card link */
+    .article-track a.article-card{color:var(--ink);text-decoration:none;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s}
+    .article-track a.article-card:hover{transform:translateY(-2px);border-color:#d5bb81;box-shadow:0 12px 28px rgba(60,45,16,.07)}
+    .article-track a.article-card:focus-visible{outline:3px solid #c59027;outline-offset:3px}
+    .article-track .article-card h3{color:#10213a}
+    html[data-theme="dark"] .article-track a.article-card{color:#edf2f7}
+    html[data-theme="dark"] .article-track .article-card h3{color:#edf2f7}
+
+  </style>
 </head>
 <body>
   <header class="nav">
@@ -264,9 +273,9 @@
         <a class="outline-button" href="artikel.html">Lihat Semua Artikel →</a>
       </div>
       <div class="article-track" data-article-track role="region" aria-label="Pilihan artikel Emastracker" tabindex="0">
-        <article class="article-card"><div class="article-card-top"><span class="article-card-label">01 · Asas simpanan</span><span aria-hidden="true">↗</span></div><h3><a href="artikel.html?artikel=mula-simpan-emas">Mula menyimpan emas</a></h3><p>Bina pelan kecil yang realistik dan fahami kos sebelum membeli.</p><a class="article-card-link" href="artikel.html?artikel=mula-simpan-emas">Baca panduan →</a></article>
-        <article class="article-card"><div class="article-card-top"><span class="article-card-label">02 · Ketulenan</span><span aria-hidden="true">↗</span></div><h3><a href="artikel.html?artikel=emas-999-916">Emas 999 atau 916?</a></h3><p>Kenali fineness, karat dan anggaran nilai kandungan emas.</p><a class="article-card-link" href="artikel.html?artikel=emas-999-916">Baca panduan →</a></article>
-        <article class="article-card"><div class="article-card-top"><span class="article-card-label">03 · Jual semula</span><span aria-hidden="true">↗</span></div><h3><a href="artikel.html?artikel=jual-emas">Semak harga buyback</a></h3><p>Bandingkan spread, upah dan syarat sebelum menjual.</p><a class="article-card-link" href="artikel.html?artikel=jual-emas">Baca panduan →</a></article>
+        <a class="article-card" href="artikel.html?artikel=mula-simpan-emas" aria-label="Baca artikel: Mula menyimpan emas"><span class="article-card-label">01 · Asas simpanan</span><span aria-hidden="true">↗</span><h3>Mula menyimpan emas</h3><p>Bina pelan kecil yang realistik dan fahami kos sebelum membeli.</p><span class="article-card-link">Baca panduan →</span></a>
+        <a class="article-card" href="artikel.html?artikel=emas-999-916" aria-label="Baca artikel: Emas 999 atau 916?"><span class="article-card-label">02 · Ketulenan</span><span aria-hidden="true">↗</span><h3>Emas 999 atau 916?</h3><p>Kenali fineness, karat dan anggaran nilai kandungan emas.</p><span class="article-card-link">Baca panduan →</span></a>
+        <a class="article-card" href="artikel.html?artikel=jual-emas" aria-label="Baca artikel: Semak harga buyback"><span class="article-card-label">03 · Jual semula</span><span aria-hidden="true">↗</span><h3>Semak harga buyback</h3><p>Bandingkan spread, upah dan syarat sebelum menjual.</p><span class="article-card-link">Baca panduan →</span></a>
       </div>
     </div>
   </section>
