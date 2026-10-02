@@ -124,6 +124,20 @@
     html[data-theme="dark"] .article-empty-label{color:#e2b75b}
     html[data-theme="dark"] .article-empty-copy{color:#aab6c4}
     @media(max-width:640px){.articles.empty-section{padding:28px 0 32px}.articles .section-row{gap:12px;align-items:flex-end}.articles .section-title{font-size:24px}.articles .outline-button{padding:9px 12px}.article-track{margin-top:13px}.article-empty-card{flex-basis:min(100%,280px);min-height:78px;padding:11px 12px}}
+
+    .article-card{flex:0 0 min(100%,300px);min-height:176px;padding:17px 18px;border:1px solid #e9e5dc;border-radius:15px;background:linear-gradient(135deg,#fffdf9,#fbf8f1);scroll-snap-align:start;display:flex;flex-direction:column;align-items:flex-start}
+    .article-card-top{width:100%;display:flex;justify-content:space-between;align-items:center;color:#9b6c13;font-size:11px;font-weight:800}
+    .article-card h3{margin:13px 0 5px;font:800 17px/1.25 'Manrope',sans-serif;letter-spacing:-.025em}
+    .article-card h3 a{color:#10213a;text-decoration:none}.article-card h3 a:hover{text-decoration:underline;text-underline-offset:3px}
+    .article-card p{margin:0;color:#6b7482;font-size:12px;line-height:1.6}
+    .article-card-link{margin-top:auto;padding-top:12px;color:#8e651a;font-size:11px;font-weight:800;text-decoration:none}
+    .article-card-link:hover{text-decoration:underline;text-underline-offset:3px}
+    html[data-theme="dark"] .article-card{border-color:#2c3a4c;background:#172131}
+    html[data-theme="dark"] .article-card h3 a{color:#edf2f7}
+    html[data-theme="dark"] .article-card p{color:#aab6c4}
+    html[data-theme="dark"] .article-card-top,html[data-theme="dark"] .article-card-link{color:#e2b75b}
+    @media(max-width:640px){.article-card{flex-basis:min(100%,280px);min-height:166px;padding:15px}}
+  
 </style>
 </head>
 <body>
@@ -249,11 +263,10 @@
         </div>
         <a class="outline-button" href="artikel.html">Lihat Semua Artikel →</a>
       </div>
-      <div class="article-track" data-article-track role="region" aria-label="Ruang artikel Emastracker" tabindex="0">
-        <div class="article-empty-card" role="status">
-          <span class="article-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4.75A2.75 2.75 0 0 1 7.75 2H20v17H7.75A2.75 2.75 0 0 0 5 21V4.75Z"/><path d="M5 18.25A2.75 2.75 0 0 1 7.75 16H20M9 7h7M9 10h7"/></svg></span>
-          <span><span class="article-empty-label">Artikel menyusul</span><span class="article-empty-copy">Artikel baharu akan dipaparkan di sini nanti.</span></span>
-        </div>
+      <div class="article-track" data-article-track role="region" aria-label="Pilihan artikel Emastracker" tabindex="0">
+        <article class="article-card"><div class="article-card-top"><span class="article-card-label">01 · Asas simpanan</span><span aria-hidden="true">↗</span></div><h3><a href="artikel.html#mula-simpan-emas">Mula menyimpan emas</a></h3><p>Bina pelan kecil yang realistik dan fahami kos sebelum membeli.</p><a class="article-card-link" href="artikel.html#mula-simpan-emas">Baca panduan →</a></article>
+        <article class="article-card"><div class="article-card-top"><span class="article-card-label">02 · Ketulenan</span><span aria-hidden="true">↗</span></div><h3><a href="artikel.html#emas-999-916">Emas 999 atau 916?</a></h3><p>Kenali fineness, karat dan anggaran nilai kandungan emas.</p><a class="article-card-link" href="artikel.html#emas-999-916">Baca panduan →</a></article>
+        <article class="article-card"><div class="article-card-top"><span class="article-card-label">03 · Jual semula</span><span aria-hidden="true">↗</span></div><h3><a href="artikel.html#jual-emas">Semak harga buyback</a></h3><p>Bandingkan spread, upah dan syarat sebelum menjual.</p><a class="article-card-link" href="artikel.html#jual-emas">Baca panduan →</a></article>
       </div>
     </div>
   </section>
