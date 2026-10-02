@@ -107,6 +107,23 @@
     html[data-theme="dark"] .modal-box,html[data-theme="dark"] .search-panel{background:#172131;color:#edf2f7}html[data-theme="dark"] .field input,html[data-theme="dark"] .field select,html[data-theme="dark"] .search-inner input{background:#101722;border-color:#405064;color:#edf2f7}html[data-theme="dark"] .close{background:#263548;color:#edf2f7}
     html[data-theme="dark"] .ad-dot{background:#405064}html[data-theme="dark"] .ad-dot.active{background:#d6a33d}
     @media(max-width:940px){html[data-theme="dark"] .nav-links{background:#101722}}
+
+    .articles.empty-section{padding:34px 0 38px;background:#fff}
+    .articles .section-row{align-items:center}
+    .article-track{display:flex;gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#d8c696 transparent;margin-top:16px;padding:2px 1px 6px}
+    .article-track::-webkit-scrollbar{height:4px}
+    .article-track::-webkit-scrollbar-thumb{background:#d8c696;border-radius:4px}
+    .article-empty-card{flex:0 0 min(100%,300px);min-height:86px;display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid #e9e5dc;border-radius:14px;background:linear-gradient(135deg,#fffdf9,#fbf8f1);scroll-snap-align:start}
+    .article-empty-icon{width:37px;height:37px;flex:0 0 auto;display:grid;place-items:center;border-radius:11px;background:#f7edd4;color:#9a6b13}
+    .article-empty-icon svg{width:18px;height:18px}
+    .article-empty-label,.article-empty-copy{display:block}
+    .article-empty-label{margin-bottom:4px;color:#77591e;font-size:11px;font-weight:700}
+    .article-empty-copy{color:#6b7482;font-size:10px;line-height:1.45}
+    html[data-theme="dark"] .article-empty-card{border-color:#2c3a4c;background:#172131}
+    html[data-theme="dark"] .article-empty-icon{background:#2c3a4c;color:#e2b75b}
+    html[data-theme="dark"] .article-empty-label{color:#e2b75b}
+    html[data-theme="dark"] .article-empty-copy{color:#aab6c4}
+    @media(max-width:640px){.articles.empty-section{padding:28px 0 32px}.articles .section-row{gap:12px;align-items:flex-end}.articles .section-title{font-size:24px}.articles .outline-button{padding:9px 12px}.article-track{margin-top:13px}.article-empty-card{flex-basis:min(100%,280px);min-height:78px;padding:11px 12px}}
 </style>
 </head>
 <body>
@@ -224,7 +241,21 @@
     </div></div>
   </section>
   <section class="empty-section articles" id="artikel">
-    <div class="shell"><div class="section-row"><div><div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 15 11-11 5 5L9 20H4v-5Z"/></svg>Artikel &amp; Berita</div><h2 class="section-title">Info Emas Terkini</h2></div><a class="outline-button" href="artikel.html">Lihat Semua Artikel →</a></div><div class="empty-space" aria-label="Ruang artikel masih kosong"></div></div>
+    <div class="shell">
+      <div class="section-row">
+        <div>
+          <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 15 11-11 5 5L9 20H4v-5Z"/></svg>Artikel &amp; Berita</div>
+          <h2 class="section-title">Info Emas Terkini</h2>
+        </div>
+        <a class="outline-button" href="artikel.html">Lihat Semua Artikel →</a>
+      </div>
+      <div class="article-track" data-article-track role="region" aria-label="Ruang artikel Emastracker" tabindex="0">
+        <div class="article-empty-card" role="status">
+          <span class="article-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4.75A2.75 2.75 0 0 1 7.75 2H20v17H7.75A2.75 2.75 0 0 0 5 21V4.75Z"/><path d="M5 18.25A2.75 2.75 0 0 1 7.75 16H20M9 7h7M9 10h7"/></svg></span>
+          <span><span class="article-empty-label">Artikel menyusul</span><span class="article-empty-copy">Artikel baharu akan dipaparkan di sini nanti.</span></span>
+        </div>
+      </div>
+    </div>
   </section>
   </main>
   <footer class="footer" id="tentang"><div class="shell">
