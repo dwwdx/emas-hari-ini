@@ -147,7 +147,19 @@
     html[data-theme="dark"] .article-track a.article-card{color:#edf2f7}
     html[data-theme="dark"] .article-track .article-card h3{color:#edf2f7}
 
-  </style>
+      /* Real editorial photography for article cards */
+    .articles .article-track a.article-card{min-height:0;padding:0;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;border-radius:15px}
+    .articles .article-card-image{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;background:#f4f0e7}
+    .articles .article-card-content{display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:14px 16px 16px}
+    .articles .article-card-label{margin:0;color:#77591e;font-size:11px;font-weight:700}
+    .articles .article-card h3{margin:8px 0 5px}
+    .articles .article-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+    .articles .article-track a.article-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(55,44,20,.12)}
+    html[data-theme="dark"] .articles .article-track a.article-card{background:#172131}
+    html[data-theme="dark"] .articles .article-card-label{color:#e2b75b}
+    @media(max-width:640px){.articles .article-track a.article-card{flex-basis:min(100%,280px)}.articles .article-card-content{padding:13px 14px 15px}}
+    @media(prefers-reduced-motion:reduce){.articles .article-track a.article-card{transition:none}}
+</style>
 </head>
 <body>
   <header class="nav">
@@ -273,9 +285,9 @@
         <a class="outline-button" href="artikel.html">Lihat Semua Artikel →</a>
       </div>
       <div class="article-track" data-article-track role="region" aria-label="Pilihan artikel Emastracker" tabindex="0">
-        <a class="article-card" href="artikel.html?artikel=mula-simpan-emas" aria-label="Baca artikel: Mula menyimpan emas"><span class="article-card-label">Asas simpanan</span><h3>Mula menyimpan emas</h3><p>Bina pelan kecil yang realistik dan fahami kos sebelum membeli.</p></a>
-        <a class="article-card" href="artikel.html?artikel=emas-999-916" aria-label="Baca artikel: Emas 999 atau 916?"><span class="article-card-label">Ketulenan</span><h3>Emas 999 atau 916?</h3><p>Kenali fineness, karat dan anggaran nilai kandungan emas.</p></a>
-        <a class="article-card" href="artikel.html?artikel=jual-emas" aria-label="Baca artikel: Semak harga buyback"><span class="article-card-label">Jual semula</span><h3>Semak harga buyback</h3><p>Bandingkan spread, upah dan syarat sebelum menjual.</p></a>
+        <a class="article-card" href="artikel.html?artikel=mula-simpan-emas" aria-label="Baca artikel: Mula menyimpan emas"><img class="article-card-image" src="./images/articles/mula-simpan-emas.jpg" alt="Jongkong emas di sisi buku catatan simpanan" width="960" height="640" loading="lazy" decoding="async"><div class="article-card-content"><span class="article-card-label">Asas simpanan</span><h3>Mula menyimpan emas</h3><p>Bina pelan kecil yang realistik dan fahami kos sebelum membeli.</p></div></a>
+        <a class="article-card" href="artikel.html?artikel=emas-999-916" aria-label="Baca artikel: Emas 999 atau 916?"><img class="article-card-image" src="./images/articles/emas-999-916.jpg" alt="Jongkong emas bersama gelang emas 916" width="960" height="640" loading="lazy" decoding="async"><div class="article-card-content"><span class="article-card-label">Ketulenan</span><h3>Emas 999 atau 916?</h3><p>Kenali fineness, karat dan anggaran nilai kandungan emas.</p></div></a>
+        <a class="article-card" href="artikel.html?artikel=jual-emas" aria-label="Baca artikel: Semak harga buyback"><img class="article-card-image" src="./images/articles/jual-emas.jpg" alt="Cincin emas di atas neraca timbang kedai emas" width="960" height="640" loading="lazy" decoding="async"><div class="article-card-content"><span class="article-card-label">Jual semula</span><h3>Semak harga buyback</h3><p>Bandingkan spread, upah dan syarat sebelum menjual.</p></div></a>
       </div>
     </div>
   </section>
