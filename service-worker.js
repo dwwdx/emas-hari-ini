@@ -1,4 +1,4 @@
-const CACHE_NAME = 'emastracker-shell-v1';
+const CACHE_NAME = 'emastracker-shell-v2';
 const CORE_ASSETS = ['./', './index.html', './produk.html', './artikel.html', './logo-emasharini.svg', './emastracker-logo.jpg'];
 
 self.addEventListener('install', event => {
