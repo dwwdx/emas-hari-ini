@@ -24,7 +24,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   const scope = new URL(self.registration.scope);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname === new URL('api/gold-price', scope).pathname) return;
+  if (url.pathname === new URL('api/gold-price', scope).pathname || url.pathname === new URL('chart-history.json', scope).pathname) return;
 
   if (request.mode === 'navigate') {
     event.respondWith((async () => {
