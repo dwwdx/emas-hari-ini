@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "source": "hargaemas.my API",
+  "updatedAt": "2026-10-03T06:29:19.382Z",
+  "lastUpdate": "2026-10-03T14:23:18+08:00",
+  "prices": {
+    "spotSellRmPerKg": 547815,
+    "spotBuyRmPerKg": 539805,
+    "taelSellRm": 20704,
+    "taelBuyRm": 20401,
+    "silverSellRmPerKg": 8.96,
+    "silverBuyRmPerKg": 7.25,
+    "usdMyrSell": 4.0963,
+    "usdMyrBuy": 4.0696,
+    "MksBuy": 539805,
+    "MksSell": 547815,
+    "TaelBuy": 20401,
+    "TaelSell": 20704,
+    "SilverBuy": 7.25,
+    "SilverSell": 8.96,
+    "UsdMyrBuy": 4.0696,
+    "UsdMyrSell": 4.0963
+  },
+  "points": [
+    {
+      "time": "2026-10-03T06:29:19.382Z",
+      "value": 547.82
+    }
+  ]
+}
