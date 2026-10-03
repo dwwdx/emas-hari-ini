@@ -298,7 +298,6 @@
     const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
     const PRICE_SOURCES = [
-      { url: './api/gold-price', name: 'server Emastracker' },
       { url: 'https://www.hargaemas.my/api/gold-prices.json', name: 'hargaemas.my API' }
     ];
 
@@ -365,8 +364,6 @@
       $('tickSilver').textContent = '—';
       const updated = new Date(data.lastUpdate);
       const validDate = !Number.isNaN(updated.getTime());
-      const checked = new Date(data.checkedAt || data.lastUpdate);
-      const observedTime = !Number.isNaN(checked.getTime()) ? checked.getTime() : Date.now();
       const sourceTime=validDate?new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(updated):'sebentar tadi';
       state.lastChecked=Date.now();
       const delayed=sourceIsStale(data)||Boolean(data.servedFromCache)||fromDevice;
@@ -376,7 +373,6 @@
           : `Bacaan terakhir · sumber ${sourceTime}`)
         : `Sumber ${sourceTime} · disemak sekarang`;
       $('statusDot').classList.toggle('live',!delayed);
-      addPoint(observedTime,state.price999);
       updateCalculator();
     }
 
@@ -385,13 +381,22 @@
     }
     function scheduleRefresh(delay){clearTimeout(state.refreshTimer);state.refreshTimer=setTimeout(()=>fetchGoldPrice(false),delay);}
 
-    function addPoint(time,value){
-      try{state.points=JSON.parse(localStorage.getItem('emasHariniPoints')||'[]');}catch{state.points=[];}
-      state.points=Array.isArray(state.points)?state.points.filter(p=>Number.isFinite(p.time)&&Number.isFinite(p.value)):[];
-      if(!state.points.some(p=>p.time===time))state.points.push({time,value});
-      state.points=state.points.filter(p=>Date.now()-p.time<7*86400000).sort((a,b)=>a.time-b.time).slice(-144);
-      try{localStorage.setItem('emasHariniPoints',JSON.stringify(state.points));}catch{}
-      drawChart();
+    async function fetchSharedHistory(){
+      try{
+        const response=await fetch('./chart-history.json?ts='+Date.now(),{headers:{'Accept':'application/json'},cache:'no-store'});
+        if(!response.ok)throw new Error('Sejarah carta HTTP '+response.status);
+        const data=await response.json();
+        const points=Array.isArray(data.points)?data.points:[];
+        state.points=points
+          .filter(p=>Number.isFinite(Number(p.time))&&Number.isFinite(Number(p.value)))
+          .map(p=>({time:Number(p.time),value:Number(p.value)}))
+          .filter(p=>Date.now()-p.time<24*60*60*1000)
+          .sort((a,b)=>a.time-b.time);
+        drawChart();
+      }catch(error){
+        if(!state.points.length)drawChart();
+        console.warn('Sejarah carta bersama tidak dapat dimuatkan',error);
+      }
     }
     function drawChart(){
       const canvas=$('goldChart'), box=canvas.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
@@ -454,8 +459,10 @@ function updateCalculator(){
     $('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.toLowerCase();const id=q.includes('artikel')||q.includes('berita')?'artikel':q.includes('produk')?'produk':q.includes('kalkulator')?'panduan':q.includes('carta')?'carta':'harga';document.getElementById(id).scrollIntoView({behavior:'smooth'});$('searchPanel').classList.remove('open');}});
     $('refreshPrice').addEventListener('click',()=>fetchGoldPrice(true));
     const chartCanvas=$('goldChart');chartCanvas.addEventListener('pointermove',showChartTooltip);chartCanvas.addEventListener('pointerdown',showChartTooltip);chartCanvas.addEventListener('pointerleave',hideChartTooltip);chartCanvas.addEventListener('pointercancel',hideChartTooltip);
-    window.addEventListener('online',()=>fetchGoldPrice(true));window.addEventListener('resize',drawChart);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-state.lastChecked>120000)fetchGoldPrice(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
+    window.addEventListener('online',()=>{fetchGoldPrice(true);fetchSharedHistory();});window.addEventListener('resize',drawChart);document.addEventListener('visibilitychange',()=>{if(!document.hidden){fetchSharedHistory();if(Date.now()-state.lastChecked>120000)fetchGoldPrice(false);}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
     restoreSavedPrice();
+    fetchSharedHistory();
+    setInterval(fetchSharedHistory,120000);
     fetchGoldPrice();
   </script>
   <script>
