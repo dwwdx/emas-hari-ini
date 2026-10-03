@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Harga emas Malaysia semasa dan kalkulator emas.">
+  <meta name="description" content="Harga emas Malaysia semasa, carta harga dan kalkulator emas.">
   <meta name="theme-color" content="#10213a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Emastracker">
@@ -47,7 +47,7 @@
     .primary-button{display:inline-flex;align-items:center;gap:12px;border:0;border-radius:9px;padding:14px 20px;background:linear-gradient(135deg,#b98019,#dba83d);box-shadow:0 8px 22px rgba(188,132,28,.23);color:#fff;font-weight:700;font-size:13px;cursor:pointer;transition:.25s transform,.25s box-shadow}.primary-button:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(188,132,28,.32)}.primary-button svg{width:18px}
     .hero-visual{min-height:330px;position:relative}.gold-scene{position:absolute;inset:0;overflow:hidden;border-radius:32px;background:#ead6ad url('gold-hero.png') center/cover no-repeat;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
     .gold-scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,251,242,.24),transparent 47%);pointer-events:none}
-    .live-panels{position:absolute;left:-34px;right:-18px;bottom:-38px;display:grid;grid-template-columns:1fr;gap:10px;z-index:4}.price-card{min-width:0;background:rgba(255,255,255,.96);border:1px solid rgba(232,227,218,.95);border-radius:12px;box-shadow:var(--shadow);padding:19px 21px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.card-kicker{font-size:12px;font-weight:800}.refresh-button{display:inline-flex;align-items:center;gap:6px;border:1px solid #e8d8b5;background:#fffaf0;color:#926717;border-radius:7px;padding:7px 9px;font-size:9px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.2s background,.2s transform}.refresh-button:hover{background:#f8ebcf;transform:translateY(-1px)}.refresh-button:disabled{opacity:.62;cursor:wait;transform:none}.refresh-button svg{width:13px;height:13px}.refresh-button.loading svg{animation:spin .75s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.prices{display:grid;grid-template-columns:1fr 1fr}.price-unit+ .price-unit{padding-left:18px;border-left:1px solid #ece8df}.karat{font-size:13px;font-weight:800}.price{color:#b47b13;font:800 22px/1.25 'Manrope';margin-top:7px}.per{font-size:10px;color:#7a8290}.update-row{display:flex;align-items:center;gap:6px;border-top:1px solid #eeeae2;margin-top:14px;padding-top:11px;font-size:10px;color:#7b8490}.status-dot{width:7px;height:7px;border-radius:50%;background:#c59027;box-shadow:0 0 0 3px #f7ebce;flex:0 0 auto}.status-dot.live{background:#2d9669;box-shadow:0 0 0 3px #d9f2e7}
+    .live-panels{position:absolute;left:-34px;right:-18px;bottom:-38px;display:grid;grid-template-columns:1fr;gap:10px;z-index:4}.price-card,.chart-card{min-width:0;background:rgba(255,255,255,.96);border:1px solid rgba(232,227,218,.95);border-radius:12px;box-shadow:var(--shadow);padding:19px 21px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.card-kicker{font-size:12px;font-weight:800}.refresh-button{display:inline-flex;align-items:center;gap:6px;border:1px solid #e8d8b5;background:#fffaf0;color:#926717;border-radius:7px;padding:7px 9px;font-size:9px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.2s background,.2s transform}.refresh-button:hover{background:#f8ebcf;transform:translateY(-1px)}.refresh-button:disabled{opacity:.62;cursor:wait;transform:none}.refresh-button svg{width:13px;height:13px}.refresh-button.loading svg{animation:spin .75s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.prices{display:grid;grid-template-columns:1fr 1fr}.price-unit+ .price-unit{padding-left:18px;border-left:1px solid #ece8df}.karat{font-size:13px;font-weight:800}.price{color:#b47b13;font:800 22px/1.25 'Manrope';margin-top:7px}.per{font-size:10px;color:#7a8290}.update-row{display:flex;align-items:center;gap:6px;border-top:1px solid #eeeae2;margin-top:14px;padding-top:11px;font-size:10px;color:#7b8490}.status-dot{width:7px;height:7px;border-radius:50%;background:#c59027;box-shadow:0 0 0 3px #f7ebce;flex:0 0 auto}.status-dot.live{background:#2d9669;box-shadow:0 0 0 3px #d9f2e7}.chart-wrap{height:136px;position:relative}.chart-wrap canvas{width:100%;height:100%;display:block}.chart-tooltip{position:absolute;z-index:2;max-width:calc(100% - 16px);padding:6px 8px;border-radius:7px;background:#14233a;color:#fff;font:700 10px 'DM Sans',sans-serif;white-space:nowrap;box-shadow:0 6px 16px rgba(20,35,58,.2);pointer-events:none}.chart-tooltip[hidden]{display:none}
     .market{background:#fff;padding:48px 0 22px}.market-bar{min-height:52px;border:1px solid #eeeae1;border-radius:10px;box-shadow:0 6px 20px rgba(36,39,43,.04);display:flex;align-items:center;overflow:hidden}.market-label{display:flex;align-items:center;gap:9px;padding:0 20px;font-size:12px;font-weight:800;color:#956d20;white-space:nowrap}.market-label svg{width:16px}.ticker{flex:1;display:grid;grid-template-columns:repeat(4,1fr)}.tick{padding:0 19px;border-left:1px solid #eeeae1;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10px}.tick strong{font-size:10px}.tick-value{color:#a9781b;font-weight:700}.skeleton-text{display:inline-block;width:50px;height:7px;border-radius:9px;background:linear-gradient(90deg,#ede8dd,#fbf8f1,#ede8dd);background-size:200%;animation:shimmer 1.5s infinite}@keyframes shimmer{to{background-position:-200%}}
     .ad-section{padding:0 0 16px;background:#fff}
     .ad-carousel{border:1px solid #eee9df;border-radius:14px;background:#fffdf9;padding:10px;box-shadow:0 8px 24px rgba(31,35,41,.035)}
@@ -76,7 +76,7 @@
     @media(max-width:640px){.product-feature{grid-template-columns:1fr;gap:16px}.product-feature-media{width:180px}.product-feature-title{font-size:22px}.product-feature-bottom{align-items:flex-start;flex-direction:column;gap:12px}}
     @media(max-width:640px){
       .shell{width:min(100% - 28px,1180px)}.brand-logo{width:48px;height:48px;border-radius:14px;object-fit:cover;overflow:hidden;box-shadow:0 3px 10px rgba(161,112,23,.16);}.nav .round-button#searchBtn{display:none}
-      .hero{padding:34px 0 76px}h1{font-size:40px}.hero-copy{font-size:14px}.hero-visual{min-height:400px;margin:0}.gold-scene{height:220px;border-radius:21px}.live-panels{left:0;right:0;top:180px;bottom:auto;grid-template-columns:1fr}.price-card{padding:16px}
+      .hero{padding:34px 0 76px}h1{font-size:40px}.hero-copy{font-size:14px}.hero-visual{min-height:560px;margin:0}.gold-scene{height:220px;border-radius:21px}.live-panels{left:0;right:0;top:180px;bottom:auto;grid-template-columns:1fr}.price-card,.chart-card{padding:16px}.chart-wrap{height:115px}
       .market{padding-top:28px}.market-bar{display:block}.market-label{padding:14px 16px;border-bottom:1px solid #eeeae1}.ticker{grid-template-columns:1fr 1fr}.tick{border-bottom:1px solid #eeeae1}.features{padding-top:12px}.feature-grid{grid-template-columns:1fr}.feature:last-child{grid-column:auto}.feature{min-height:0}.section-row{align-items:flex-start;flex-direction:column}.outline-button{display:inline-flex;align-self:flex-start}.empty-section{padding:38px 0}.empty-space{height:110px}.footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}.footer-brand{grid-column:1/-1}.footer-bottom{display:block;line-height:1.7}.footer-bottom span:last-child{display:block;margin-top:7px}
     }
   
@@ -99,7 +99,7 @@
     html[data-theme="dark"]{color-scheme:dark}html[data-theme="dark"] body{background:#101722;color:#edf2f7}
     html[data-theme="dark"] .nav{background:rgba(16,23,34,.96);border-color:#293647}html[data-theme="dark"] .nav-links{background:#101722;border-color:#293647}html[data-theme="dark"] .nav-links a{color:#d9e1ea}html[data-theme="dark"] .nav-links a:hover,html[data-theme="dark"] .nav-links a.active{color:#e2b75b}html[data-theme="dark"] .round-button{background:#1b2737;color:#edf2f7}html[data-theme="dark"] .round-button:hover{background:#29394d}
     html[data-theme="dark"] .hero{background:radial-gradient(circle at 78% 18%,rgba(145,103,25,.24),transparent 24%),linear-gradient(105deg,#101722 0%,#172231 56%,#263447 100%)}html[data-theme="dark"] .hero-copy{color:#b8c2ce}
-    html[data-theme="dark"] .live-panels .price-card,html[data-theme="dark"] .market-bar,html[data-theme="dark"] .feature,html[data-theme="dark"] .ad-carousel,html[data-theme="dark"] .product-feature{background:#172131;border-color:#2c3a4c;box-shadow:0 10px 28px rgba(0,0,0,.2)}
+    html[data-theme="dark"] .live-panels .price-card,html[data-theme="dark"] .live-panels .chart-card,html[data-theme="dark"] .market-bar,html[data-theme="dark"] .feature,html[data-theme="dark"] .ad-carousel,html[data-theme="dark"] .product-feature{background:#172131;border-color:#2c3a4c;box-shadow:0 10px 28px rgba(0,0,0,.2)}
     html[data-theme="dark"] .market,html[data-theme="dark"] .ad-section{background:#101722}html[data-theme="dark"] .empty-section{background:linear-gradient(180deg,#172131,#101722)}html[data-theme="dark"] footer{background:#0d141e;border-color:#293647}
     html[data-theme="dark"] .section-copy,html[data-theme="dark"] .feature p,html[data-theme="dark"] .per,html[data-theme="dark"] .update-row,html[data-theme="dark"] .footer-nav,html[data-theme="dark"] .source-text,html[data-theme="dark"] .brand-tag{color:#aab6c4}
     html[data-theme="dark"] .price-unit+.price-unit,html[data-theme="dark"] .update-row,html[data-theme="dark"] .tick,html[data-theme="dark"] .market-label{border-color:#2c3a4c}
@@ -147,55 +147,6 @@
     html[data-theme="dark"] .article-track a.article-card{color:#edf2f7}
     html[data-theme="dark"] .article-track .article-card h3{color:#edf2f7}
 
-
-    .history-section{padding:38px 0 66px;background:linear-gradient(180deg,#fbf8f1 0%,#fffdf9 100%)}
-    .history-inner{max-width:1080px;margin:0 auto}
-    .history-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:18px}
-    .history-eyebrow{margin:0 0 8px;color:#9b6c13;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-    .history-title{margin:0;color:#10213a;font:800 clamp(25px,3.6vw,36px)/1.12 'Manrope',sans-serif;letter-spacing:-.04em}
-    .history-intro{max-width:620px;margin:9px 0 0;color:#6b7482;font-size:13px;line-height:1.65}
-    .history-switch,.history-ranges{display:flex;align-items:center;gap:5px;padding:5px;border:1px solid #e8e1d4;border-radius:12px;background:rgba(255,255,255,.78)}
-    .history-switch button,.history-ranges button{border:0;border-radius:8px;padding:9px 12px;background:transparent;color:#657080;font:700 11px 'DM Sans',sans-serif;cursor:pointer;transition:background .18s,color .18s,transform .18s;white-space:nowrap}
-    .history-switch button:hover,.history-ranges button:hover{color:#8a6217;background:#f8f1e2}
-    .history-switch button[aria-pressed="true"],.history-ranges button[aria-pressed="true"]{background:#10213a;color:#fff;box-shadow:0 3px 10px rgba(16,33,58,.13)}
-    .history-panel{overflow:hidden;border:1px solid #e9e5dc;border-radius:20px;background:#fff;box-shadow:0 14px 38px rgba(45,39,27,.065)}
-    .history-topline{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 22px 16px;border-bottom:1px solid #eee9df}
-    .history-value{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-    .history-latest{color:#10213a;font:800 clamp(24px,4vw,34px)/1 'Manrope',sans-serif;letter-spacing:-.04em}
-    .history-unit{color:#7b8490;font-size:12px;font-weight:600}
-    .history-recorded{margin:7px 0 0;color:#7b8490;font-size:11px}
-    .history-chart-wrap{position:relative;min-height:250px;padding:10px 12px 0}
-    .history-svg{display:block;width:100%;height:auto;min-height:220px;max-height:340px;overflow:visible;touch-action:pan-y}
-    .history-grid-line{stroke:#ebe7df;stroke-width:1;stroke-dasharray:3 5}
-    .history-axis-label{fill:#818a96;font:11px 'DM Sans',sans-serif}
-    .history-line{fill:none;stroke:#c59027;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-    .history-area{fill:url(#historyFill);opacity:.62}
-    .history-crosshair{stroke:#a87920;stroke-width:1;stroke-dasharray:4 4;vector-effect:non-scaling-stroke}
-    .history-focus{fill:#fff;stroke:#b98019;stroke-width:3;vector-effect:non-scaling-stroke}
-    .history-tooltip{position:absolute;z-index:2;max-width:190px;padding:9px 11px;border:1px solid #e8dfcc;border-radius:10px;background:rgba(255,253,249,.97);box-shadow:0 8px 22px rgba(23,31,43,.12);color:#10213a;font-size:11px;line-height:1.5;pointer-events:none;transform:translate(-50%,-110%)}
-    .history-tooltip[hidden],.history-svg[hidden],.history-empty[hidden]{display:none!important}
-    .history-tooltip strong{display:block;font-size:13px}
-    .history-empty{display:grid;place-items:center;min-height:250px;padding:28px;color:#738090;text-align:center;font-size:13px;line-height:1.65}
-    .history-empty strong{display:block;margin-bottom:4px;color:#10213a;font-size:15px}
-    .history-footer{display:flex;justify-content:space-between;gap:12px;padding:12px 22px 15px;border-top:1px solid #f0ede7;color:#7b8490;font-size:10px;line-height:1.5}
-    .history-footer strong{color:#657080}
-    html[data-theme="dark"] .history-section{background:linear-gradient(180deg,#131d2a 0%,#101722 100%)}
-    html[data-theme="dark"] .history-title,html[data-theme="dark"] .history-latest,html[data-theme="dark"] .history-empty strong{color:#edf2f7}
-    html[data-theme="dark"] .history-intro,html[data-theme="dark"] .history-unit,html[data-theme="dark"] .history-recorded,html[data-theme="dark"] .history-footer{color:#aab6c4}
-    html[data-theme="dark"] .history-switch,html[data-theme="dark"] .history-ranges{border-color:#344256;background:#172131}
-    html[data-theme="dark"] .history-switch button,html[data-theme="dark"] .history-ranges button{color:#c3ceda}
-    html[data-theme="dark"] .history-switch button:hover,html[data-theme="dark"] .history-ranges button:hover{background:#253449;color:#f1d48f}
-    html[data-theme="dark"] .history-switch button[aria-pressed="true"],html[data-theme="dark"] .history-ranges button[aria-pressed="true"]{background:#c59027;color:#fff}
-    html[data-theme="dark"] .history-panel{border-color:#2c3a4c;background:#172131;box-shadow:0 14px 38px rgba(0,0,0,.22)}
-    html[data-theme="dark"] .history-topline,html[data-theme="dark"] .history-footer{border-color:#2c3a4c}
-    html[data-theme="dark"] .history-grid-line{stroke:#334153}
-    html[data-theme="dark"] .history-axis-label{fill:#aab6c4}
-    html[data-theme="dark"] .history-tooltip{border-color:#47536a;background:rgba(23,33,49,.97);color:#edf2f7}
-    html[data-theme="dark"] .history-focus{fill:#172131}
-    @media(max-width:680px){.history-section{padding:28px 0 48px}.history-heading{align-items:flex-start;flex-direction:column}.history-topline{align-items:flex-start;flex-direction:column;padding:17px 15px 14px}.history-chart-wrap{min-height:210px;padding:4px 3px 0}.history-svg{min-height:205px}.history-ranges{width:100%;justify-content:space-between}.history-ranges button{padding:8px 9px;font-size:10px}.history-footer{padding:11px 15px;flex-direction:column;gap:3px}.history-switch button{padding:8px 12px}}
-    @media(prefers-reduced-motion:reduce){.history-switch button,.history-ranges button{transition:none}}
-  
-    #trend{scroll-margin-top:100px}
   </style>
 </head>
 <body>
@@ -206,7 +157,7 @@
         <div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
-        <a class="active" href="#harga">Harga Emas</a><a href="#trend">Carta</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a><a href="#tentang">Tentang Kami</a>
+        <a class="active" href="#harga">Harga Emas</a><a href="#carta">Carta</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a><a href="#tentang">Tentang Kami</a>
       </nav>
       <div class="nav-actions">
         <button class="round-button" id="searchBtn" aria-label="Buka carian"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
@@ -235,6 +186,10 @@
             </div>
             <div class="update-row"><span class="status-dot" id="statusDot"></span><span id="lastUpdate">Mengambil harga terkini…</span></div>
           </article>
+          <article class="chart-card" id="carta">
+            <div class="card-head"><div class="card-kicker">Carta Harga Emas (24K)</div><span class="per" id="chartTrend">Kumpul bacaan…</span></div>
+            <div class="chart-wrap"><canvas id="goldChart" aria-label="Carta garis bacaan sebenar harga emas 24 karat" style="touch-action:none"></canvas><div class="chart-tooltip" id="chartTooltip" role="status" aria-live="polite" hidden></div></div>
+          </article>
         </div>
       </div>
     </div>
@@ -248,44 +203,6 @@
         <div class="tick"><strong>HARGA BELI</strong><span class="tick-value" id="tickBuy"><i class="skeleton-text"></i></span></div>
         <div class="tick"><strong>PERAK / KG</strong><span class="tick-value" id="tickSilver"><i class="skeleton-text"></i></span></div>
       </div>
-    </div>
-  </section>
-  <section class="history-section" id="trend" aria-labelledby="historyTitle">
-    <div class="shell history-inner">
-      <div class="history-heading">
-        <div>
-          <p class="history-eyebrow">Rekod bersama untuk semua peranti</p>
-          <h2 class="history-title" id="historyTitle">Carta harga emas</h2>
-          <p class="history-intro">Jejak perubahan harga rujukan emas Malaysia. Sejarah dikemas kini berkala dan sama untuk semua pelawat.</p>
-        </div>
-        <div class="history-switch" role="group" aria-label="Pilih ketulenan carta">
-          <button type="button" data-history-karat="999" aria-pressed="true">999 / 24K</button>
-          <button type="button" data-history-karat="916" aria-pressed="false">916 / 22K</button>
-        </div>
-      </div>
-      <article class="history-panel" aria-label="Carta sejarah harga emas">
-        <div class="history-topline">
-          <div>
-            <div class="history-value"><strong class="history-latest" id="historyLatest">Memuatkan…</strong><span class="history-unit">RM / gram</span></div>
-            <p class="history-recorded" id="historyUpdated">Membaca sejarah harga bersama…</p>
-          </div>
-          <div class="history-ranges" role="group" aria-label="Pilih tempoh carta">
-            <button type="button" data-history-range="day" aria-pressed="true">24 jam</button>
-            <button type="button" data-history-range="week" aria-pressed="false">7 hari</button>
-            <button type="button" data-history-range="month" aria-pressed="false">30 hari</button>
-            <button type="button" data-history-range="year" aria-pressed="false">1 tahun</button>
-          </div>
-        </div>
-        <div class="history-chart-wrap" id="historyChartWrap">
-          <svg class="history-svg" id="historyChart" viewBox="0 0 960 300" preserveAspectRatio="none" role="img" aria-label="Carta sejarah harga emas dalam ringgit Malaysia bagi setiap gram">
-            <defs><linearGradient id="historyFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#c59027" stop-opacity=".34"/><stop offset="100%" stop-color="#c59027" stop-opacity=".015"/></linearGradient></defs>
-            <g id="historyGrid"></g><path class="history-area" id="historyArea"></path><path class="history-line" id="historyLine"></path><line class="history-crosshair" id="historyCrosshair" x1="0" x2="0" y1="0" y2="0" style="display:none"></line><circle class="history-focus" id="historyFocus" cx="0" cy="0" r="5" style="display:none"></circle>
-          </svg>
-          <div class="history-tooltip" id="historyTooltip" role="status" hidden></div>
-          <div class="history-empty" id="historyEmpty" hidden><div><strong>Belum cukup rekod untuk tempoh ini</strong><span id="historyEmptyText">Bacaan harga akan dikumpulkan secara automatik setiap empat jam.</span></div></div>
-        </div>
-        <div class="history-footer"><span id="historyCount">Rekod harga bersama</span><span>Anggaran 916 dikira daripada kadar 999 × 0.916; harga kedai mungkin berbeza.</span></div>
-      </article>
     </div>
   </section>
   <section class="ad-section" id="ruang-iklan" aria-label="Carousel iklan">
@@ -366,7 +283,7 @@
   <footer class="footer" id="tentang"><div class="shell">
     <div class="footer-grid">
       <div class="footer-brand"><a class="brand" href="#utama"><img class="brand-logo" src="emastracker-logo.jpg?v=1" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a></div>
-      <div><h4>Pautan Pantas</h4><div class="footer-nav"><a href="#harga">Harga Emas</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a></div></div>
+      <div><h4>Pautan Pantas</h4><div class="footer-nav"><a href="#harga">Harga Emas</a><a href="#carta">Carta</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a></div></div>
       <div><h4>Ikuti Kami</h4><div class="socials"><span class="social">f</span><span class="social">in</span><span class="social">▶</span><span class="social">t</span></div></div>
       <div><h4>Sumber Harga Emas</h4><div class="source-text">Harga spot emas daripada <a href="https://www.hargaemas.my/" target="_blank" rel="noopener">HargaEmas.my</a></div></div>
     </div>
@@ -376,7 +293,7 @@
   <div class="modal" id="calcModal" role="dialog" aria-modal="true" aria-labelledby="calcTitle"><div class="modal-box"><div class="modal-head"><h2 id="calcTitle">Kalkulator Emas</h2><button class="close" id="closeCalc" aria-label="Tutup">×</button></div><div class="field"><label for="weight">Berat emas (gram)</label><input id="weight" inputmode="decimal" type="number" min="0" step="0.01" value="1"></div><div class="field"><label for="purity">Ketulenan</label><select id="purity"><option value="999 / 24K">999 / 24K</option><option value="916 / 22K">916 / 22K</option></select></div><div class="calc-result" id="calcResult">RM --.--</div></div></div>
   <div class="toast" id="toast" role="status"></div>
   <script>
-    const state = { price999: 0, price916: 0, fetching: false, lastChecked: 0, refreshTimer: null };
+    const state = { price999: 0, price916: 0, points: [], chartGeometry: null, fetching: false, lastChecked: 0, refreshTimer: null };
     const $ = (id) => document.getElementById(id);
     const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
@@ -459,6 +376,7 @@
           : `Bacaan terakhir · sumber ${sourceTime}`)
         : `Sumber ${sourceTime} · disemak sekarang`;
       $('statusDot').classList.toggle('live',!delayed);
+      addPoint(observedTime,state.price999);
       updateCalculator();
     }
 
@@ -467,6 +385,60 @@
     }
     function scheduleRefresh(delay){clearTimeout(state.refreshTimer);state.refreshTimer=setTimeout(()=>fetchGoldPrice(false),delay);}
 
+    function addPoint(time,value){
+      try{state.points=JSON.parse(localStorage.getItem('emasHariniPoints')||'[]');}catch{state.points=[];}
+      state.points=Array.isArray(state.points)?state.points.filter(p=>Number.isFinite(p.time)&&Number.isFinite(p.value)):[];
+      if(!state.points.some(p=>p.time===time))state.points.push({time,value});
+      state.points=state.points.filter(p=>Date.now()-p.time<7*86400000).sort((a,b)=>a.time-b.time).slice(-144);
+      try{localStorage.setItem('emasHariniPoints',JSON.stringify(state.points));}catch{}
+      drawChart();
+    }
+    function drawChart(){
+      const canvas=$('goldChart'), box=canvas.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
+      const w=box.width,h=box.height;canvas.width=Math.max(1,w*dpr);canvas.height=Math.max(1,h*dpr);
+      const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+      const pad={l:44,r:10,t:15,b:23};
+      const pointsData=state.points.filter(p=>Number.isFinite(p.time)&&Number.isFinite(p.value));
+      const trend=$('chartTrend');
+      if(!pointsData.length){state.chartGeometry=null;hideChartTooltip();if(trend)trend.textContent='Menunggu bacaan…';ctx.fillStyle='#8b929b';ctx.font="10px 'DM Sans'";ctx.fillText('Menunggu harga terkini…',pad.l,h/2);return;}
+      const values=pointsData.map(p=>p.value),rawMin=Math.min(...values),rawMax=Math.max(...values),spread=Math.max(rawMax-rawMin,Math.abs(rawMax)*.002,1),min=rawMin-spread*.32,max=rawMax+spread*.32;
+      const plotW=Math.max(1,w-pad.l-pad.r),plotH=Math.max(1,h-pad.t-pad.b);
+      const points=pointsData.map((p,i)=>({x:pointsData.length===1?pad.l+plotW/2:pad.l+i*plotW/(pointsData.length-1),y:pad.t+(max-p.value)/(max-min)*plotH,value:p.value,time:p.time}));
+      state.chartGeometry={points,width:w,height:h};
+      const first=points[0].value,last=points[points.length-1].value,delta=last-first,goingUp=delta>0,goingDown=delta<0;
+      const changePercent=first?delta/first*100:0;
+      const signedMoney=value=>(value>0?'+':value<0?'-':'')+'RM '+Math.abs(value).toFixed(2);
+      const signedPercent=value=>(value>0?'+':value<0?'-':'')+Math.abs(value).toFixed(2)+'%';
+      if(trend)trend.textContent=points.length<2?'Kumpul bacaan…':(goingUp?'↗ Naik ':goingDown?'↘ Turun ':'→ Stabil ')+signedMoney(delta)+' ('+signedPercent(changePercent)+')';
+      const lineColor=goingUp?'#2d9669':goingDown?'#c46b42':'#bb8017';
+      ctx.font="8px 'DM Sans'";ctx.textBaseline='middle';ctx.textAlign='right';
+      for(let i=0;i<3;i++){
+        const y=pad.t+i*plotH/2,value=max-i*(max-min)/2;ctx.strokeStyle='#ece6da';ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#8b929b';ctx.fillText('RM'+value.toFixed(2),pad.l-6,y);
+      }
+      const curvePath=()=>{const path=[];path.push(['M',points[0].x,points[0].y]);for(let i=1;i<points.length;i++){const prev=points[i-1],curr=points[i],mid=(prev.x+curr.x)/2;path.push(['Q',prev.x,prev.y,mid,(prev.y+curr.y)/2]);}if(points.length>1){const lastPoint=points[points.length-1],prev=points[points.length-2];path.push(['Q',prev.x+(lastPoint.x-prev.x)/2,(prev.y+lastPoint.y)/2,lastPoint.x,lastPoint.y]);}return path;};
+      const trace=(path)=>{ctx.beginPath();for(const part of path){if(part[0]==='M')ctx.moveTo(part[1],part[2]);else ctx.quadraticCurveTo(part[1],part[2],part[3],part[4]);}};
+      if(points.length>1){
+        const path=curvePath();trace(path);ctx.lineTo(points.at(-1).x,h-pad.b);ctx.lineTo(points[0].x,h-pad.b);ctx.closePath();const fill=ctx.createLinearGradient(0,pad.t,0,h-pad.b);fill.addColorStop(0,goingUp?'rgba(45,150,105,.26)':'rgba(187,128,23,.25)');fill.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=fill;ctx.fill();
+        trace(path);ctx.strokeStyle=lineColor;ctx.lineWidth=2.4;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
+      } else {ctx.strokeStyle='#d8c294';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(pad.l,points[0].y);ctx.lineTo(w-pad.r,points[0].y);ctx.stroke();ctx.setLineDash([]);}
+      const lastPoint=points.at(-1);ctx.beginPath();ctx.arc(lastPoint.x,lastPoint.y,5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=lineColor;ctx.stroke();
+      const formatTime=t=>new Intl.DateTimeFormat('ms-MY',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(t));
+      ctx.fillStyle='#8b929b';ctx.font="8px 'DM Sans'";ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText(formatTime(points[0].time),pad.l,h);ctx.textAlign='right';ctx.fillText(formatTime(lastPoint.time),w-pad.r,h);
+      ctx.fillStyle=lineColor;ctx.font="800 9px 'Manrope'";ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText(money(lastPoint.value),w-pad.r,pad.t+2);
+    }
+    function hideChartTooltip(){const tooltip=$('chartTooltip');if(tooltip)tooltip.hidden=true;}
+    function showChartTooltip(event){
+      const geometry=state.chartGeometry,canvas=$('goldChart'),tooltip=$('chartTooltip');
+      if(!geometry||!canvas||!tooltip||!Number.isFinite(event.clientX))return;
+      const rect=canvas.getBoundingClientRect(),wrap=canvas.parentElement;
+      const x=Math.max(0,Math.min(geometry.width,event.clientX-rect.left));
+      let nearest=geometry.points[0],distance=Math.abs(nearest.x-x);
+      for(const point of geometry.points){const nextDistance=Math.abs(point.x-x);if(nextDistance<distance){nearest=point;distance=nextDistance;}}
+      const time=new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(nearest.time));
+      tooltip.textContent=time+' · '+money(nearest.value)+'/g';tooltip.hidden=false;tooltip.style.left='0px';tooltip.style.top='0px';
+      const maxLeft=Math.max(8,wrap.clientWidth-tooltip.offsetWidth-8),left=Math.max(8,Math.min(maxLeft,nearest.x-tooltip.offsetWidth/2)),top=Math.max(4,nearest.y-tooltip.offsetHeight-10);
+      tooltip.style.left=left+'px';tooltip.style.top=top+'px';
+    }
 function updateCalculator(){
       const weight=Math.max(0,Number($('weight').value)||0),is916=$('purity').value.includes('916');
       const rate=is916?state.price916:state.price999;
@@ -479,9 +451,10 @@ function updateCalculator(){
     $('calcModal').addEventListener('click',e=>{if(e.target===$('calcModal'))toggleCalc(false)});$('weight').addEventListener('input',updateCalculator);$('purity').addEventListener('change',updateCalculator);
     $('menuBtn').addEventListener('click',()=>$('navLinks').classList.toggle('open'));document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>$('navLinks').classList.remove('open')));
     $('searchBtn').addEventListener('click',()=>{$('searchPanel').classList.add('open');setTimeout(()=>$('searchInput').focus(),250)});$('closeSearch').addEventListener('click',()=>$('searchPanel').classList.remove('open'));
-    $('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.toLowerCase();const id=q.includes('artikel')||q.includes('berita')?'artikel':q.includes('produk')?'produk':q.includes('kalkulator')?'panduan':'harga';document.getElementById(id).scrollIntoView({behavior:'smooth'});$('searchPanel').classList.remove('open');}});
+    $('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.toLowerCase();const id=q.includes('artikel')||q.includes('berita')?'artikel':q.includes('produk')?'produk':q.includes('kalkulator')?'panduan':q.includes('carta')?'carta':'harga';document.getElementById(id).scrollIntoView({behavior:'smooth'});$('searchPanel').classList.remove('open');}});
     $('refreshPrice').addEventListener('click',()=>fetchGoldPrice(true));
-    window.addEventListener('online',()=>fetchGoldPrice(true));document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-state.lastChecked>120000)fetchGoldPrice(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
+    const chartCanvas=$('goldChart');chartCanvas.addEventListener('pointermove',showChartTooltip);chartCanvas.addEventListener('pointerdown',showChartTooltip);chartCanvas.addEventListener('pointerleave',hideChartTooltip);chartCanvas.addEventListener('pointercancel',hideChartTooltip);
+    window.addEventListener('online',()=>fetchGoldPrice(true));window.addEventListener('resize',drawChart);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-state.lastChecked>120000)fetchGoldPrice(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
     restoreSavedPrice();
     fetchGoldPrice();
   </script>
@@ -528,122 +501,5 @@ function updateCalculator(){
       });
     }
   </script>
-<script>
-(() => {
-  const svg = document.getElementById("historyChart");
-  if (!svg) return;
-  const ns = "http://www.w3.org/2000/svg";
-  const dataUrl = "./gold-history.json";
-  const ranges = { day: 24 * 60 * 60 * 1000, week: 7 * 24 * 60 * 60 * 1000, month: 30 * 24 * 60 * 60 * 1000, year: 365 * 24 * 60 * 60 * 1000 };
-  const rangeLabels = { day: "24 jam terakhir", week: "7 hari terakhir", month: "30 hari terakhir", year: "1 tahun terakhir" };
-  const state = { samples: [], range: "day", karat: 999, plotted: [] };
-  const el = id => document.getElementById(id);
-  const money = value => "RM " + Number(value).toLocaleString("ms-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const dateTime = value => new Intl.DateTimeFormat("ms-MY", { timeZone: "Asia/Kuala_Lumpur", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }).format(value);
-  const axisDate = (value, range) => {
-    const opts = range === "day" ? { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur" } : range === "year" ? { month: "short", year: "2-digit", timeZone: "Asia/Kuala_Lumpur" } : { day: "numeric", month: "short", timeZone: "Asia/Kuala_Lumpur" };
-    return new Intl.DateTimeFormat("ms-MY", opts).format(value);
-  };
-  const makeSvg = (name, attrs) => {
-    const node = document.createElementNS(ns, name);
-    Object.keys(attrs).forEach(key => node.setAttribute(key, String(attrs[key])));
-    return node;
-  };
-  const clearTooltip = () => { el("historyTooltip").hidden = true; el("historyCrosshair").style.display = "none"; el("historyFocus").style.display = "none"; };
-  const visiblePrice = row => state.karat === 916 ? row.sellRmPerGram * 0.916 : row.sellRmPerGram;
-  const render = () => {
-    const now = Date.now();
-    const duration = ranges[state.range];
-    const start = now - duration;
-    const rows = state.samples.filter(row => row.time >= start && row.time <= now + 5 * 60 * 1000);
-    const latest = state.samples[state.samples.length - 1];
-    el("historyLatest").textContent = latest ? money(visiblePrice(latest)) : "Belum tersedia";
-    el("historyUpdated").textContent = latest ? "Rekod terakhir " + dateTime(new Date(latest.time)) + " · " + rangeLabels[state.range] : "Belum ada bacaan harga";
-    el("historyCount").textContent = rows.length + (rows.length === 1 ? " bacaan" : " bacaan") + " dalam " + rangeLabels[state.range] + ". Direkod setiap empat jam.";
-    const empty = rows.length === 0;
-    el("historyEmpty").hidden = !empty;
-    svg.hidden = empty;
-    if (empty) { el("historyEmptyText").textContent = state.samples.length ? "Belum ada bacaan dalam tempoh " + rangeLabels[state.range] + ". Pilih tempoh lebih panjang." : "Bacaan harga akan dikumpulkan secara automatik setiap empat jam."; clearTooltip(); return; }
-    const width = 960, height = 300, margin = { left: 82, right: 20, top: 16, bottom: 36 };
-    const plotWidth = width - margin.left - margin.right, plotHeight = height - margin.top - margin.bottom;
-    const values = rows.map(visiblePrice);
-    const rawMin = Math.min.apply(null, values), rawMax = Math.max.apply(null, values);
-    const spread = Math.max(rawMax - rawMin, rawMax * 0.004, 1);
-    const min = rawMin - spread * 0.16, max = rawMax + spread * 0.16;
-    const xAt = time => margin.left + Math.max(0, Math.min(1, (time - start) / duration)) * plotWidth;
-    const yAt = price => margin.top + (max - price) / (max - min) * plotHeight;
-    const points = rows.map(row => ({ row, time: row.time, value: visiblePrice(row), x: xAt(row.time), y: yAt(visiblePrice(row)) }));
-    state.plotted = points;
-    const grid = el("historyGrid");
-    grid.replaceChildren();
-    for (let i = 0; i <= 4; i++) {
-      const y = margin.top + plotHeight * i / 4;
-      grid.append(makeSvg("line", { x1: margin.left, x2: width - margin.right, y1: y, y2: y, class: "history-grid-line" }));
-      const value = max - (max - min) * i / 4;
-      const label = makeSvg("text", { x: margin.left - 10, y: y + 4, "text-anchor": "end", class: "history-axis-label" });
-      label.textContent = money(value);
-      grid.append(label);
-    }
-    for (let i = 0; i <= 4; i++) {
-      const time = start + duration * i / 4;
-      const x = margin.left + plotWidth * i / 4;
-      const label = makeSvg("text", { x: x, y: height - 9, "text-anchor": i === 0 ? "start" : i === 4 ? "end" : "middle", class: "history-axis-label" });
-      label.textContent = axisDate(new Date(time), state.range);
-      grid.append(label);
-    }
-    const linePath = points.map((p, i) => (i === 0 ? "M" : "L") + p.x.toFixed(2) + " " + p.y.toFixed(2)).join(" ");
-    el("historyLine").setAttribute("d", linePath);
-    el("historyArea").setAttribute("d", points.length > 1 ? linePath + " L " + points[points.length - 1].x.toFixed(2) + " " + (height - margin.bottom) + " L " + points[0].x.toFixed(2) + " " + (height - margin.bottom) + " Z" : "");
-    const last = points[points.length - 1];
-    el("historyFocus").setAttribute("cx", last.x); el("historyFocus").setAttribute("cy", last.y);
-    el("historyFocus").style.display = "block";
-    el("historyCrosshair").setAttribute("x1", last.x); el("historyCrosshair").setAttribute("x2", last.x);
-    el("historyCrosshair").setAttribute("y1", margin.top); el("historyCrosshair").setAttribute("y2", height - margin.bottom);
-    svg.setAttribute("aria-label", "Carta harga emas " + state.karat + " per gram, " + rangeLabels[state.range] + ", harga terkini " + money(last.value));
-  };
-  const selectButtons = (selector, attr, value) => document.querySelectorAll(selector).forEach(button => button.setAttribute("aria-pressed", String(button.getAttribute(attr) === value)));
-  document.querySelectorAll("[data-history-range]").forEach(button => button.addEventListener("click", () => { state.range = button.getAttribute("data-history-range"); selectButtons("[data-history-range]", "data-history-range", state.range); render(); }));
-  document.querySelectorAll("[data-history-karat]").forEach(button => button.addEventListener("click", () => { state.karat = Number(button.getAttribute("data-history-karat")); selectButtons("[data-history-karat]", "data-history-karat", String(state.karat)); render(); }));
-  const showNearest = event => {
-    if (!state.plotted.length) return;
-    const rect = svg.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width * 960;
-    let nearest = state.plotted[0];
-    for (const point of state.plotted) if (Math.abs(point.x - x) < Math.abs(nearest.x - x)) nearest = point;
-    const cross = el("historyCrosshair"), focus = el("historyFocus"), tip = el("historyTooltip");
-    cross.setAttribute("x1", nearest.x); cross.setAttribute("x2", nearest.x); cross.style.display = "block";
-    focus.setAttribute("cx", nearest.x); focus.setAttribute("cy", nearest.y); focus.style.display = "block";
-    tip.innerHTML = "<strong>" + money(nearest.value) + " /g</strong>" + dateTime(new Date(nearest.time));
-    tip.hidden = false;
-    const wrapRect = el("historyChartWrap").getBoundingClientRect();
-    const px = event.clientX - wrapRect.left;
-    const py = event.clientY - wrapRect.top;
-    tip.style.left = Math.max(95, Math.min(wrapRect.width - 95, px)) + "px";
-    tip.style.top = Math.max(68, py) + "px";
-  };
-  svg.addEventListener("pointermove", showNearest);
-  svg.addEventListener("pointerdown", showNearest);
-  svg.addEventListener("pointerleave", clearTooltip);
-  async function loadHistory() {
-    try {
-      const response = await fetch(dataUrl + "?v=" + Date.now(), { cache: "no-store", headers: { Accept: "application/json" } });
-      if (!response.ok) throw new Error("HTTP " + response.status);
-      const data = await response.json();
-      state.samples = (Array.isArray(data.samples) ? data.samples : []).map(row => ({ time: Date.parse(row.recordedAt), sellRmPerGram: Number(row.sellRmPerGram), buyRmPerGram: Number(row.buyRmPerGram) })).filter(row => Number.isFinite(row.time) && Number.isFinite(row.sellRmPerGram) && row.sellRmPerGram > 0).sort((a, b) => a.time - b.time);
-      render();
-    } catch (error) {
-      el("historyLatest").textContent = "Tidak tersedia";
-      el("historyUpdated").textContent = "Sejarah harga tidak dapat dimuat. Semak sambungan internet.";
-      el("historyEmptyText").textContent = "Cuba muat semula halaman untuk mendapatkan fail sejarah terkini.";
-      el("historyEmpty").hidden = false; svg.hidden = true; el("historyCount").textContent = "Sumber: rekod harga bersama Emastracker.";
-      console.warn("Unable to load shared gold history", error);
-    }
-  }
-  loadHistory();
-  window.setInterval(loadHistory, 15 * 60 * 1000);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) loadHistory(); });
-})();
-</script>
-
 </body>
 </html>
