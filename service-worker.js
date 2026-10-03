@@ -1,5 +1,5 @@
-const CACHE_NAME = 'emastracker-shell-v3';
-const CORE_ASSETS = ['./', './index.html', './produk.html', './artikel.html', './logo-emasharini.svg', './emastracker-logo.jpg', './images/articles/mula-simpan-emas.jpg', './images/articles/emas-999-916.jpg', './images/articles/jual-emas.jpg', './images/articles/tawaran-emas-online.jpg'];
+const CACHE_NAME = 'emastracker-shell-v4';
+const CORE_ASSETS = ['./', './index.html', './produk.html', './artikel.html', './logo-emasharini.svg', './emastracker-logo.jpg', './images/articles/mula-simpan-emas.jpg', './images/articles/emas-999-916.jpg', './images/articles/jual-emas.jpg'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
