@@ -295,149 +295,156 @@
   <script>
     const state = { price999: 0, price916: 0, points: [], chartGeometry: null, fetching: false, lastChecked: 0, refreshTimer: null };
     const $ = (id) => document.getElementById(id);
-    const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+    const money = (n) => "RM " + Number(n).toLocaleString("ms-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const SHARED_HISTORY_URL = "https://raw.githubusercontent.com/dwwdx/emxs-haxi-ini-xde-redxzawex/chart-data/gold-history.json";
+    const MAX_SOURCE_AGE_MS = 6 * 60 * 60 * 1000;
 
-    const PRICE_SOURCES = [
-      { url: './api/gold-price', name: 'server Emastracker' },
-      { url: 'https://www.hargaemas.my/api/gold-prices.json', name: 'hargaemas.my API' }
-    ];
-
-    function positiveNumber(value){const n=Number(value);return Number.isFinite(n)&&n>0;}
-    function validPriceData(data){const p=data?.prices;return positiveNumber(p?.spotSellRmPerKg)&&positiveNumber(p?.spotBuyRmPerKg);}
-    function optionalMoney(value){return positiveNumber(value)?money(value):'Tidak tersedia';}
-    function optionalRate(value,digits=4){const n=Number(value);return Number.isFinite(n)&&n>0?n.toFixed(digits):'Tidak tersedia';}
-
-    function sourceIsStale(data){
-      const timestamp = Date.parse(data?.lastUpdate);
-      const ageIsKnown = Number.isFinite(timestamp);
-      const olderThanSixHours = ageIsKnown && Date.now() - timestamp > 6 * 60 * 60 * 1000;
-      return Boolean(data?.isStale) || Number(data?.staleAgeMinutes) > 360 || olderThanSixHours;
+    function positiveNumber(value) { const n = Number(value); return Number.isFinite(n) && n > 0; }
+    function optionalMoney(value) { return positiveNumber(value) ? money(value) : "Tidak tersedia"; }
+    function optionalRate(value, digits = 4) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n.toFixed(digits) : "Tidak tersedia"; }
+    function sourceIsStale(data) {
+      const timestamp = Date.parse(data?.updatedAt);
+      return Boolean(data?.isStale) || !Number.isFinite(timestamp) || Date.now() - timestamp > MAX_SOURCE_AGE_MS;
     }
-    async function fetchGoldPrice(manual=false){
-      if(state.fetching) return;
-      state.fetching=true;
-      const button=$('refreshPrice');button.disabled=true;button.classList.add('loading');button.querySelector('span').textContent='Menyemak…';
-      let lastError;
-      let data;
-      let staleData;
-      try{
-        for(const source of PRICE_SOURCES){
-          try{
-            const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);
-            const separator=source.url.includes('?')?'&':'?';
-            const response=await fetch(source.url+separator+'ts='+Date.now(),{headers:{'Accept':'application/json'},cache:'no-store',signal:controller.signal});
-            clearTimeout(timeout);
-            if(!response.ok) throw new Error(source.name+' HTTP '+response.status);
-            const candidate=await response.json();
-            if(!validPriceData(candidate)) throw new Error(source.name+': format data tidak sah');
-            const normalized={...candidate,source:candidate.source||source.name,checkedAt:new Date().toISOString()};
-            if(sourceIsStale(normalized)){staleData ||= normalized;continue;}
-            data=normalized;
-            break;
-          }catch(error){lastError=error;}
-        }
-        if(!data&&staleData)data={...staleData,isStale:true,staleReason:'Sumber harga belum dikemas kini.'};
-        if(!data) throw lastError||new Error('Semua sumber harga tidak dapat dicapai');
-        renderPrices(data,false);
-        try{localStorage.setItem('emasHariniLastPrice',JSON.stringify(data));}catch{}
-        if(manual) showToast(sourceIsStale(data)?'API dapat dicapai tetapi bacaan sumber sudah lama.':'Harga terkini telah disemak.');
+    function validSharedHistory(data) {
+      if (data?.version !== 1 || !Array.isArray(data.points) || !data.points.length || !positiveNumber(data.prices?.spotBuyRmPerKg) || !Number.isFinite(Date.parse(data.lastUpdate)) || !Number.isFinite(Date.parse(data.updatedAt))) return false;
+      let previousTime = -Infinity;
+      for (const point of data.points) {
+        const time = Date.parse(point?.time), value = Number(point?.value);
+        if (!Number.isFinite(time) || !positiveNumber(value) || time <= previousTime) return false;
+        previousTime = time;
+      }
+      return true;
+    }
+    async function fetchGoldPrice(manual = false) {
+      if (state.fetching) return;
+      state.fetching = true;
+      const button = $("refreshPrice");
+      button.disabled = true;
+      button.classList.add("loading");
+      button.querySelector("span").textContent = "Menyemak…";
+      try {
+        const url = SHARED_HISTORY_URL + "?v=" + encodeURIComponent(Date.now());
+        const response = await fetch(url, { headers: { Accept: "application/json" }, cache: "no-store" });
+        if (!response.ok) throw new Error("Data sejarah bersama HTTP " + response.status);
+        const data = await response.json();
+        if (!validSharedHistory(data)) throw new Error("Format data sejarah bersama tidak sah");
+        renderPrices(data);
+        if (manual) showToast(sourceIsStale(data) ? "Data bersama sudah lama; paparan masih dikemas kini." : "Data harga bersama telah disemak.");
         scheduleRefresh(120000);
-      }catch(error){ lastError = error; }
-      finally{
-        state.fetching=false;button.disabled=false;button.classList.remove('loading');button.querySelector('span').textContent='Semak Terkini';
-      }
-      if(lastError && !data){
-        $('statusDot').classList.remove('live');
-        $('lastUpdate').textContent=state.price999?'Bacaan terakhir dipaparkan · cuba semula automatik':'Harga langsung tidak dapat dicapai';
-        if(manual||!state.price999) showToast('Sambungan API terganggu. Harga terakhir tidak dipadam.');
-        scheduleRefresh(30000);console.warn(lastError);
+      } catch (error) {
+        $("statusDot").classList.remove("live");
+        $("lastUpdate").textContent = state.price999 ? "Bacaan bersama terakhir dipaparkan · cuba semula automatik" : "Data harga bersama belum dapat dicapai";
+        if (manual || !state.price999) showToast("Sambungan data bersama terganggu. Carta tidak diganti dengan sejarah peranti ini.");
+        scheduleRefresh(30000);
+        console.warn(error);
+      } finally {
+        state.fetching = false;
+        button.disabled = false;
+        button.classList.remove("loading");
+        button.querySelector("span").textContent = "Semak Terkini";
       }
     }
-    function renderPrices(data,fromDevice=false){
+    function renderPrices(data) {
+      state.points = data.points.map(point => ({ time: Date.parse(point.time), value: Number(point.value) }));
+      const latest = state.points[state.points.length - 1];
+      state.price999 = latest.value;
+      state.price916 = state.price999 * 0.916;
       const p = data.prices;
-      state.price999 = Number(p.spotSellRmPerKg) / 1000;
-      state.price916 = state.price999 * .916;
-      $('price999').textContent = money(state.price999);
-      $('price916').textContent = money(state.price916);
-      $('tick999').textContent = `${money(state.price999)} /g`;
-      $('tickUsd').textContent = optionalRate(p.usdMyrSell);
-      $('tickBuy').textContent = positiveNumber(p.spotBuyRmPerKg)?money(Number(p.spotBuyRmPerKg)/1000)+' /g':'Tidak tersedia';
-      $('tickSilver').textContent = '—';
-      const updated = new Date(data.lastUpdate);
-      const validDate = !Number.isNaN(updated.getTime());
-      const checked = new Date(data.checkedAt || data.lastUpdate);
-      const observedTime = !Number.isNaN(checked.getTime()) ? checked.getTime() : Date.now();
-      const sourceTime=validDate?new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(updated):'sebentar tadi';
-      state.lastChecked=Date.now();
-      const delayed=sourceIsStale(data)||Boolean(data.servedFromCache)||fromDevice;
-      $('lastUpdate').textContent=delayed
-        ? (fromDevice || sourceIsStale(data)
-          ? `Harga tersimpan · mungkin lapuk · sumber ${sourceTime}`
-          : `Bacaan terakhir · sumber ${sourceTime}`)
-        : `Sumber ${sourceTime} · disemak sekarang`;
-      $('statusDot').classList.toggle('live',!delayed);
-      addPoint(observedTime,state.price999);
+      $("price999").textContent = money(state.price999);
+      $("price916").textContent = money(state.price916);
+      $("tick999").textContent = money(state.price999) + " /g";
+      $("tickUsd").textContent = optionalRate(p.usdMyrSell);
+      $("tickBuy").textContent = positiveNumber(p.spotBuyRmPerKg) ? money(Number(p.spotBuyRmPerKg) / 1000) + " /g" : "Tidak tersedia";
+      $("tickSilver").textContent = "—";
+      const sourceTime = new Date(data.lastUpdate);
+      const sharedTime = new Date(data.updatedAt);
+      const formatTime = value => new Intl.DateTimeFormat("ms-MY", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur" }).format(value);
+      const stale = sourceIsStale(data);
+      $("lastUpdate").textContent = stale
+        ? "Data bersama mungkin lapuk · sumber " + formatTime(sourceTime)
+        : "Sumber " + formatTime(sourceTime) + " · dikemas kini " + formatTime(sharedTime);
+      $("statusDot").classList.toggle("live", !stale);
+      state.lastChecked = Date.now();
+      drawChart();
       updateCalculator();
     }
-
-    function restoreSavedPrice(){
-      try{const saved=JSON.parse(localStorage.getItem('emasHariniLastPrice')||'null');if(saved?.prices?.spotSellRmPerKg)renderPrices(saved,true);}catch{}
-    }
-    function scheduleRefresh(delay){clearTimeout(state.refreshTimer);state.refreshTimer=setTimeout(()=>fetchGoldPrice(false),delay);}
-
-    function addPoint(time,value){
-      try{state.points=JSON.parse(localStorage.getItem('emasHariniPoints')||'[]');}catch{state.points=[];}
-      state.points=Array.isArray(state.points)?state.points.filter(p=>Number.isFinite(p.time)&&Number.isFinite(p.value)):[];
-      if(!state.points.some(p=>p.time===time))state.points.push({time,value});
-      state.points=state.points.filter(p=>Date.now()-p.time<7*86400000).sort((a,b)=>a.time-b.time).slice(-144);
-      try{localStorage.setItem('emasHariniPoints',JSON.stringify(state.points));}catch{}
-      drawChart();
-    }
-    function drawChart(){
-      const canvas=$('goldChart'), box=canvas.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
-      const w=box.width,h=box.height;canvas.width=Math.max(1,w*dpr);canvas.height=Math.max(1,h*dpr);
-      const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
-      const pad={l:44,r:10,t:15,b:23};
-      const pointsData=state.points.filter(p=>Number.isFinite(p.time)&&Number.isFinite(p.value));
-      const trend=$('chartTrend');
-      if(!pointsData.length){state.chartGeometry=null;hideChartTooltip();if(trend)trend.textContent='Menunggu bacaan…';ctx.fillStyle='#8b929b';ctx.font="10px 'DM Sans'";ctx.fillText('Menunggu harga terkini…',pad.l,h/2);return;}
-      const values=pointsData.map(p=>p.value),rawMin=Math.min(...values),rawMax=Math.max(...values),spread=Math.max(rawMax-rawMin,Math.abs(rawMax)*.002,1),min=rawMin-spread*.32,max=rawMax+spread*.32;
-      const plotW=Math.max(1,w-pad.l-pad.r),plotH=Math.max(1,h-pad.t-pad.b);
-      const points=pointsData.map((p,i)=>({x:pointsData.length===1?pad.l+plotW/2:pad.l+i*plotW/(pointsData.length-1),y:pad.t+(max-p.value)/(max-min)*plotH,value:p.value,time:p.time}));
-      state.chartGeometry={points,width:w,height:h};
-      const first=points[0].value,last=points[points.length-1].value,delta=last-first,goingUp=delta>0,goingDown=delta<0;
-      const changePercent=first?delta/first*100:0;
-      const signedMoney=value=>(value>0?'+':value<0?'-':'')+'RM '+Math.abs(value).toFixed(2);
-      const signedPercent=value=>(value>0?'+':value<0?'-':'')+Math.abs(value).toFixed(2)+'%';
-      if(trend)trend.textContent=points.length<2?'Kumpul bacaan…':(goingUp?'↗ Naik ':goingDown?'↘ Turun ':'→ Stabil ')+signedMoney(delta)+' ('+signedPercent(changePercent)+')';
-      const lineColor=goingUp?'#2d9669':goingDown?'#c46b42':'#bb8017';
-      ctx.font="8px 'DM Sans'";ctx.textBaseline='middle';ctx.textAlign='right';
-      for(let i=0;i<3;i++){
-        const y=pad.t+i*plotH/2,value=max-i*(max-min)/2;ctx.strokeStyle='#ece6da';ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#8b929b';ctx.fillText('RM'+value.toFixed(2),pad.l-6,y);
+    function scheduleRefresh(delay) { clearTimeout(state.refreshTimer); state.refreshTimer = setTimeout(() => fetchGoldPrice(false), delay); }
+    function chartLineColor(points) {
+      let color = "#2d9669";
+      for (let i = 1; i < points.length; i++) {
+        if (points[i].value > points[i - 1].value) color = "#2d9669";
+        else if (points[i].value < points[i - 1].value) color = "#c44d41";
       }
-      const curvePath=()=>{const path=[];path.push(['M',points[0].x,points[0].y]);for(let i=1;i<points.length;i++){const prev=points[i-1],curr=points[i],mid=(prev.x+curr.x)/2;path.push(['Q',prev.x,prev.y,mid,(prev.y+curr.y)/2]);}if(points.length>1){const lastPoint=points[points.length-1],prev=points[points.length-2];path.push(['Q',prev.x+(lastPoint.x-prev.x)/2,(prev.y+lastPoint.y)/2,lastPoint.x,lastPoint.y]);}return path;};
-      const trace=(path)=>{ctx.beginPath();for(const part of path){if(part[0]==='M')ctx.moveTo(part[1],part[2]);else ctx.quadraticCurveTo(part[1],part[2],part[3],part[4]);}};
-      if(points.length>1){
-        const path=curvePath();trace(path);ctx.lineTo(points.at(-1).x,h-pad.b);ctx.lineTo(points[0].x,h-pad.b);ctx.closePath();const fill=ctx.createLinearGradient(0,pad.t,0,h-pad.b);fill.addColorStop(0,goingUp?'rgba(45,150,105,.26)':'rgba(187,128,23,.25)');fill.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=fill;ctx.fill();
-        trace(path);ctx.strokeStyle=lineColor;ctx.lineWidth=2.4;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();
-      } else {ctx.strokeStyle='#d8c294';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(pad.l,points[0].y);ctx.lineTo(w-pad.r,points[0].y);ctx.stroke();ctx.setLineDash([]);}
-      const lastPoint=points.at(-1);ctx.beginPath();ctx.arc(lastPoint.x,lastPoint.y,5,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=2.5;ctx.strokeStyle=lineColor;ctx.stroke();
-      const formatTime=t=>new Intl.DateTimeFormat('ms-MY',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(t));
-      ctx.fillStyle='#8b929b';ctx.font="8px 'DM Sans'";ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText(formatTime(points[0].time),pad.l,h);ctx.textAlign='right';ctx.fillText(formatTime(lastPoint.time),w-pad.r,h);
-      ctx.fillStyle=lineColor;ctx.font="800 9px 'Manrope'";ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText(money(lastPoint.value),w-pad.r,pad.t+2);
+      return color;
     }
-    function hideChartTooltip(){const tooltip=$('chartTooltip');if(tooltip)tooltip.hidden=true;}
-    function showChartTooltip(event){
-      const geometry=state.chartGeometry,canvas=$('goldChart'),tooltip=$('chartTooltip');
-      if(!geometry||!canvas||!tooltip||!Number.isFinite(event.clientX))return;
-      const rect=canvas.getBoundingClientRect(),wrap=canvas.parentElement;
-      const x=Math.max(0,Math.min(geometry.width,event.clientX-rect.left));
-      let nearest=geometry.points[0],distance=Math.abs(nearest.x-x);
-      for(const point of geometry.points){const nextDistance=Math.abs(point.x-x);if(nextDistance<distance){nearest=point;distance=nextDistance;}}
-      const time=new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(nearest.time));
-      tooltip.textContent=time+' · '+money(nearest.value)+'/g';tooltip.hidden=false;tooltip.style.left='0px';tooltip.style.top='0px';
-      const maxLeft=Math.max(8,wrap.clientWidth-tooltip.offsetWidth-8),left=Math.max(8,Math.min(maxLeft,nearest.x-tooltip.offsetWidth/2)),top=Math.max(4,nearest.y-tooltip.offsetHeight-10);
-      tooltip.style.left=left+'px';tooltip.style.top=top+'px';
+    function drawChart() {
+      const canvas = $("goldChart"), box = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = box.width, h = box.height;
+      canvas.width = Math.max(1, w * dpr); canvas.height = Math.max(1, h * dpr);
+      const ctx = canvas.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+      const pad = { l: 44, r: 10, t: 15, b: 23 };
+      const pointsData = state.points;
+      const trend = $("chartTrend");
+      if (!pointsData.length) { state.chartGeometry = null; hideChartTooltip(); if (trend) trend.textContent = "Menunggu data bersama…"; ctx.fillStyle = "#8b929b"; ctx.font = "10px 'DM Sans'"; ctx.fillText("Menunggu harga terkini…", pad.l, h / 2); return; }
+      const values = pointsData.map(point => point.value), rawMin = Math.min(...values), rawMax = Math.max(...values);
+      const spread = Math.max(rawMax - rawMin, Math.abs(rawMax) * 0.002, 1), min = rawMin - spread * 0.32, max = rawMax + spread * 0.32;
+      const plotW = Math.max(1, w - pad.l - pad.r), plotH = Math.max(1, h - pad.t - pad.b);
+      const firstTime = pointsData[0].time, lastTime = pointsData[pointsData.length - 1].time, timeSpan = lastTime - firstTime;
+      const points = pointsData.map((point, i) => ({
+        x: pointsData.length === 1 ? pad.l + plotW / 2 : pad.l + (timeSpan > 0 ? (point.time - firstTime) / timeSpan : i / (pointsData.length - 1)) * plotW,
+        y: pad.t + (max - point.value) / (max - min) * plotH,
+        value: point.value,
+        time: point.time
+      }));
+      state.chartGeometry = { points, width: w, height: h };
+      const color = chartLineColor(points);
+      const first = points[0].value, last = points[points.length - 1].value, delta = last - first;
+      const previous = points.length > 1 ? points[points.length - 2].value : last;
+      const lastStep = last - previous;
+      const signedMoney = value => (value > 0 ? "+" : value < 0 ? "−" : "") + "RM " + Math.abs(value).toFixed(2);
+      const signedPercent = value => (value > 0 ? "+" : value < 0 ? "−" : "") + Math.abs(value).toFixed(2) + "%";
+      if (trend) {
+        if (points.length < 2) trend.textContent = "Kumpul bacaan…";
+        else {
+          const direction = lastStep > 0 ? "↗ Naik" : lastStep < 0 ? "↘ Turun" : "→ Stabil";
+          trend.textContent = direction + " · jumlah " + signedMoney(delta) + " (" + signedPercent(first ? delta / first * 100 : 0) + ")";
+        }
+      }
+      ctx.font = "8px 'DM Sans'"; ctx.textBaseline = "middle"; ctx.textAlign = "right";
+      for (let i = 0; i < 3; i++) {
+        const y = pad.t + i * plotH / 2, value = max - i * (max - min) / 2;
+        ctx.strokeStyle = "#ece6da"; ctx.lineWidth = 1; ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke(); ctx.setLineDash([]); ctx.fillStyle = "#8b929b"; ctx.fillText("RM" + value.toFixed(2), pad.l - 6, y);
+      }
+      const curvePath = () => {
+        const path = []; path.push(["M", points[0].x, points[0].y]);
+        for (let i = 1; i < points.length; i++) { const prev = points[i - 1], curr = points[i], mid = (prev.x + curr.x) / 2; path.push(["Q", prev.x, prev.y, mid, (prev.y + curr.y) / 2]); }
+        if (points.length > 1) { const lastPoint = points[points.length - 1], prev = points[points.length - 2]; path.push(["Q", prev.x + (lastPoint.x - prev.x) / 2, (prev.y + lastPoint.y) / 2, lastPoint.x, lastPoint.y]); }
+        return path;
+      };
+      const trace = path => { ctx.beginPath(); for (const part of path) { if (part[0] === "M") ctx.moveTo(part[1], part[2]); else ctx.quadraticCurveTo(part[1], part[2], part[3], part[4]); } };
+      if (points.length > 1) {
+        const path = curvePath(); trace(path); ctx.lineTo(points[points.length - 1].x, h - pad.b); ctx.lineTo(points[0].x, h - pad.b); ctx.closePath();
+        const fill = ctx.createLinearGradient(0, pad.t, 0, h - pad.b); fill.addColorStop(0, color === "#2d9669" ? "rgba(45,150,105,.26)" : "rgba(196,77,65,.22)"); fill.addColorStop(1, "rgba(255,255,255,0)"); ctx.fillStyle = fill; ctx.fill();
+        trace(path); ctx.strokeStyle = color; ctx.lineWidth = 2.4; ctx.lineJoin = "round"; ctx.lineCap = "round"; ctx.stroke();
+      } else { ctx.strokeStyle = color; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(pad.l, points[0].y); ctx.lineTo(w - pad.r, points[0].y); ctx.stroke(); ctx.setLineDash([]); }
+      const lastPoint = points[points.length - 1]; ctx.beginPath(); ctx.arc(lastPoint.x, lastPoint.y, 5, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = color; ctx.stroke();
+      const formatAxisTime = time => new Intl.DateTimeFormat("ms-MY", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur" }).format(new Date(time));
+      ctx.fillStyle = "#8b929b"; ctx.font = "8px 'DM Sans'"; ctx.textBaseline = "bottom"; ctx.textAlign = "left"; ctx.fillText(formatAxisTime(points[0].time), pad.l, h); ctx.textAlign = "right"; ctx.fillText(formatAxisTime(lastPoint.time), w - pad.r, h);
+      ctx.fillStyle = color; ctx.font = "800 9px 'Manrope'"; ctx.textAlign = "right"; ctx.textBaseline = "top"; ctx.fillText(money(lastPoint.value), w - pad.r, pad.t + 2);
+    }
+    function hideChartTooltip() { const tooltip = $("chartTooltip"); if (tooltip) tooltip.hidden = true; }
+    function showChartTooltip(event) {
+      const geometry = state.chartGeometry, canvas = $("goldChart"), tooltip = $("chartTooltip");
+      if (!geometry || !canvas || !tooltip || !Number.isFinite(event.clientX)) return;
+      const rect = canvas.getBoundingClientRect(), wrap = canvas.parentElement;
+      const x = Math.max(0, Math.min(geometry.width, event.clientX - rect.left));
+      let nearest = geometry.points[0], distance = Math.abs(nearest.x - x);
+      for (const point of geometry.points) { const nextDistance = Math.abs(point.x - x); if (nextDistance < distance) { nearest = point; distance = nextDistance; } }
+      const time = new Intl.DateTimeFormat("ms-MY", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur" }).format(new Date(nearest.time));
+      tooltip.textContent = time + " · " + money(nearest.value) + "/g"; tooltip.hidden = false; tooltip.style.left = "0px"; tooltip.style.top = "0px";
+      const maxLeft = Math.max(8, wrap.clientWidth - tooltip.offsetWidth - 8), left = Math.max(8, Math.min(maxLeft, nearest.x - tooltip.offsetWidth / 2)), top = Math.max(4, nearest.y - tooltip.offsetHeight - 10);
+      tooltip.style.left = left + "px"; tooltip.style.top = top + "px";
     }
 function updateCalculator(){
       const weight=Math.max(0,Number($('weight').value)||0),is916=$('purity').value.includes('916');
@@ -455,7 +462,6 @@ function updateCalculator(){
     $('refreshPrice').addEventListener('click',()=>fetchGoldPrice(true));
     const chartCanvas=$('goldChart');chartCanvas.addEventListener('pointermove',showChartTooltip);chartCanvas.addEventListener('pointerdown',showChartTooltip);chartCanvas.addEventListener('pointerleave',hideChartTooltip);chartCanvas.addEventListener('pointercancel',hideChartTooltip);
     window.addEventListener('online',()=>fetchGoldPrice(true));window.addEventListener('resize',drawChart);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-state.lastChecked>120000)fetchGoldPrice(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
-    restoreSavedPrice();
     fetchGoldPrice();
   </script>
   <script>
