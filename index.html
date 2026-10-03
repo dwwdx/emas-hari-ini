@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Harga emas Malaysia semasa dan kalkulator emas.">
+  <meta name="description" content="Harga emas Malaysia semasa, carta harga dan kalkulator emas.">
   <meta name="theme-color" content="#10213a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Emastracker">
@@ -47,7 +47,7 @@
     .primary-button{display:inline-flex;align-items:center;gap:12px;border:0;border-radius:9px;padding:14px 20px;background:linear-gradient(135deg,#b98019,#dba83d);box-shadow:0 8px 22px rgba(188,132,28,.23);color:#fff;font-weight:700;font-size:13px;cursor:pointer;transition:.25s transform,.25s box-shadow}.primary-button:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(188,132,28,.32)}.primary-button svg{width:18px}
     .hero-visual{min-height:330px;position:relative}.gold-scene{position:absolute;inset:0;overflow:hidden;border-radius:32px;background:#ead6ad url('gold-hero.png') center/cover no-repeat;box-shadow:inset 0 0 0 1px rgba(255,255,255,.45)}
     .gold-scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,251,242,.24),transparent 47%);pointer-events:none}
-    .live-panels{position:absolute;left:-34px;right:-18px;bottom:-38px;display:grid;grid-template-columns:1fr;gap:10px;z-index:4}.price-card{min-width:0;background:rgba(255,255,255,.96);border:1px solid rgba(232,227,218,.95);border-radius:12px;box-shadow:var(--shadow);padding:19px 21px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.card-kicker{font-size:12px;font-weight:800}.refresh-button{display:inline-flex;align-items:center;gap:6px;border:1px solid #e8d8b5;background:#fffaf0;color:#926717;border-radius:7px;padding:7px 9px;font-size:9px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.2s background,.2s transform}.refresh-button:hover{background:#f8ebcf;transform:translateY(-1px)}.refresh-button:disabled{opacity:.62;cursor:wait;transform:none}.refresh-button svg{width:13px;height:13px}.refresh-button.loading svg{animation:spin .75s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.prices{display:grid;grid-template-columns:1fr 1fr}.price-unit+ .price-unit{padding-left:18px;border-left:1px solid #ece8df}.karat{font-size:13px;font-weight:800}.price{color:#b47b13;font:800 22px/1.25 'Manrope';margin-top:7px}.per{font-size:10px;color:#7a8290}.update-row{display:flex;align-items:center;gap:6px;border-top:1px solid #eeeae2;margin-top:14px;padding-top:11px;font-size:10px;color:#7b8490}.status-dot{width:7px;height:7px;border-radius:50%;background:#c59027;box-shadow:0 0 0 3px #f7ebce;flex:0 0 auto}.status-dot.live{background:#2d9669;box-shadow:0 0 0 3px #d9f2e7}
+    .live-panels{position:absolute;left:-34px;right:-18px;bottom:-38px;display:grid;grid-template-columns:.95fr 1.25fr;gap:10px;z-index:4}.price-card,.chart-card{min-width:0;background:rgba(255,255,255,.96);border:1px solid rgba(232,227,218,.95);border-radius:12px;box-shadow:var(--shadow);padding:19px 21px}.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.card-kicker{font-size:12px;font-weight:800}.refresh-button{display:inline-flex;align-items:center;gap:6px;border:1px solid #e8d8b5;background:#fffaf0;color:#926717;border-radius:7px;padding:7px 9px;font-size:9px;font-weight:800;cursor:pointer;white-space:nowrap;transition:.2s background,.2s transform}.refresh-button:hover{background:#f8ebcf;transform:translateY(-1px)}.refresh-button:disabled{opacity:.62;cursor:wait;transform:none}.refresh-button svg{width:13px;height:13px}.refresh-button.loading svg{animation:spin .75s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.prices{display:grid;grid-template-columns:1fr 1fr}.price-unit+ .price-unit{padding-left:18px;border-left:1px solid #ece8df}.karat{font-size:13px;font-weight:800}.price{color:#b47b13;font:800 22px/1.25 'Manrope';margin-top:7px}.per{font-size:10px;color:#7a8290}.update-row{display:flex;align-items:center;gap:6px;border-top:1px solid #eeeae2;margin-top:14px;padding-top:11px;font-size:10px;color:#7b8490}.status-dot{width:7px;height:7px;border-radius:50%;background:#c59027;box-shadow:0 0 0 3px #f7ebce;flex:0 0 auto}.status-dot.live{background:#2d9669;box-shadow:0 0 0 3px #d9f2e7}.chart-meta{font-size:9px;color:#7a8290;margin-top:3px}.chart-wrap{height:136px;position:relative}.chart-wrap canvas{width:100%;height:100%;display:block;touch-action:none}.chart-tooltip{position:absolute;z-index:2;max-width:calc(100% - 16px);padding:6px 8px;border-radius:7px;background:#14233a;color:#fff;font:700 10px 'DM Sans',sans-serif;white-space:nowrap;box-shadow:0 6px 16px rgba(20,35,58,.2);pointer-events:none}.chart-tooltip[hidden]{display:none}
     .market{background:#fff;padding:48px 0 22px}.market-bar{min-height:52px;border:1px solid #eeeae1;border-radius:10px;box-shadow:0 6px 20px rgba(36,39,43,.04);display:flex;align-items:center;overflow:hidden}.market-label{display:flex;align-items:center;gap:9px;padding:0 20px;font-size:12px;font-weight:800;color:#956d20;white-space:nowrap}.market-label svg{width:16px}.ticker{flex:1;display:grid;grid-template-columns:repeat(4,1fr)}.tick{padding:0 19px;border-left:1px solid #eeeae1;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10px}.tick strong{font-size:10px}.tick-value{color:#a9781b;font-weight:700}.skeleton-text{display:inline-block;width:50px;height:7px;border-radius:9px;background:linear-gradient(90deg,#ede8dd,#fbf8f1,#ede8dd);background-size:200%;animation:shimmer 1.5s infinite}@keyframes shimmer{to{background-position:-200%}}
     .ad-section{padding:0 0 16px;background:#fff}
     .ad-carousel{border:1px solid #eee9df;border-radius:14px;background:#fffdf9;padding:10px;box-shadow:0 8px 24px rgba(31,35,41,.035)}
@@ -76,7 +76,7 @@
     @media(max-width:640px){.product-feature{grid-template-columns:1fr;gap:16px}.product-feature-media{width:180px}.product-feature-title{font-size:22px}.product-feature-bottom{align-items:flex-start;flex-direction:column;gap:12px}}
     @media(max-width:640px){
       .shell{width:min(100% - 28px,1180px)}.brand-logo{width:48px;height:48px;border-radius:14px;object-fit:cover;overflow:hidden;box-shadow:0 3px 10px rgba(161,112,23,.16);}.nav .round-button#searchBtn{display:none}
-      .hero{padding:34px 0 76px}h1{font-size:40px}.hero-copy{font-size:14px}.hero-visual{min-height:400px;margin:0}.gold-scene{height:220px;border-radius:21px}.live-panels{left:0;right:0;top:180px;bottom:auto;grid-template-columns:1fr}.price-card{padding:16px}
+      .hero{padding:34px 0 76px}h1{font-size:40px}.hero-copy{font-size:14px}.hero-visual{min-height:560px;margin:0}.gold-scene{height:220px;border-radius:21px}.live-panels{left:0;right:0;top:180px;bottom:auto;grid-template-columns:1fr}.price-card,.chart-card{padding:16px}.chart-wrap{height:115px}
       .market{padding-top:28px}.market-bar{display:block}.market-label{padding:14px 16px;border-bottom:1px solid #eeeae1}.ticker{grid-template-columns:1fr 1fr}.tick{border-bottom:1px solid #eeeae1}.features{padding-top:12px}.feature-grid{grid-template-columns:1fr}.feature:last-child{grid-column:auto}.feature{min-height:0}.section-row{align-items:flex-start;flex-direction:column}.outline-button{display:inline-flex;align-self:flex-start}.empty-section{padding:38px 0}.empty-space{height:110px}.footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}.footer-brand{grid-column:1/-1}.footer-bottom{display:block;line-height:1.7}.footer-bottom span:last-child{display:block;margin-top:7px}
     }
   
@@ -99,7 +99,7 @@
     html[data-theme="dark"]{color-scheme:dark}html[data-theme="dark"] body{background:#101722;color:#edf2f7}
     html[data-theme="dark"] .nav{background:rgba(16,23,34,.96);border-color:#293647}html[data-theme="dark"] .nav-links{background:#101722;border-color:#293647}html[data-theme="dark"] .nav-links a{color:#d9e1ea}html[data-theme="dark"] .nav-links a:hover,html[data-theme="dark"] .nav-links a.active{color:#e2b75b}html[data-theme="dark"] .round-button{background:#1b2737;color:#edf2f7}html[data-theme="dark"] .round-button:hover{background:#29394d}
     html[data-theme="dark"] .hero{background:radial-gradient(circle at 78% 18%,rgba(145,103,25,.24),transparent 24%),linear-gradient(105deg,#101722 0%,#172231 56%,#263447 100%)}html[data-theme="dark"] .hero-copy{color:#b8c2ce}
-    html[data-theme="dark"] .live-panels .price-card,html[data-theme="dark"] .market-bar,html[data-theme="dark"] .feature,html[data-theme="dark"] .ad-carousel,html[data-theme="dark"] .product-feature{background:#172131;border-color:#2c3a4c;box-shadow:0 10px 28px rgba(0,0,0,.2)}
+    html[data-theme="dark"] .live-panels .price-card,html[data-theme="dark"] .live-panels .chart-card,html[data-theme="dark"] .market-bar,html[data-theme="dark"] .feature,html[data-theme="dark"] .ad-carousel,html[data-theme="dark"] .product-feature{background:#172131;border-color:#2c3a4c;box-shadow:0 10px 28px rgba(0,0,0,.2)}
     html[data-theme="dark"] .market,html[data-theme="dark"] .ad-section{background:#101722}html[data-theme="dark"] .empty-section{background:linear-gradient(180deg,#172131,#101722)}html[data-theme="dark"] footer{background:#0d141e;border-color:#293647}
     html[data-theme="dark"] .section-copy,html[data-theme="dark"] .feature p,html[data-theme="dark"] .per,html[data-theme="dark"] .update-row,html[data-theme="dark"] .footer-nav,html[data-theme="dark"] .source-text,html[data-theme="dark"] .brand-tag{color:#aab6c4}
     html[data-theme="dark"] .price-unit+.price-unit,html[data-theme="dark"] .update-row,html[data-theme="dark"] .tick,html[data-theme="dark"] .market-label{border-color:#2c3a4c}
@@ -157,7 +157,7 @@
         <div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
-        <a class="active" href="#harga">Harga Emas</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a><a href="#tentang">Tentang Kami</a>
+        <a class="active" href="#harga">Harga Emas</a><a href="#carta">Carta</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a><a href="#tentang">Tentang Kami</a>
       </nav>
       <div class="nav-actions">
         <button class="round-button" id="searchBtn" aria-label="Buka carian"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
@@ -185,6 +185,10 @@
               <div class="price-unit"><div class="karat">916 / 22K</div><div class="price" id="price916">RM --.--</div><div class="per">per gram</div></div>
             </div>
             <div class="update-row"><span class="status-dot" id="statusDot"></span><span id="lastUpdate">Mengambil harga terkini…</span></div>
+          </article>
+          <article class="chart-card" id="carta">
+            <div class="card-head"><div><div class="card-kicker">Carta Harga Emas (24K)</div><div class="chart-meta" id="chartStatus">Memuatkan data bersama...</div></div><span class="per" id="chartTrend">Mengumpul data...</span></div>
+            <div class="chart-wrap"><canvas id="goldChart" aria-label="Carta garis harga emas 24 karat yang sama pada semua peranti"></canvas><div class="chart-tooltip" id="chartTooltip" role="status" aria-live="polite" hidden></div></div>
           </article>
         </div>
       </div>
@@ -279,7 +283,7 @@
   <footer class="footer" id="tentang"><div class="shell">
     <div class="footer-grid">
       <div class="footer-brand"><a class="brand" href="#utama"><img class="brand-logo" src="emastracker-logo.jpg?v=1" alt="Logo Emastracker"><div><div class="brand-name">Emas<span>tracker</span></div><div class="brand-tag">Harga · Info · Panduan</div></div></a></div>
-      <div><h4>Pautan Pantas</h4><div class="footer-nav"><a href="#harga">Harga Emas</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a></div></div>
+      <div><h4>Pautan Pantas</h4><div class="footer-nav"><a href="#harga">Harga Emas</a><a href="#carta">Carta</a><a href="#artikel">Berita</a><a href="#panduan">Panduan</a></div></div>
       <div><h4>Ikuti Kami</h4><div class="socials"><span class="social">f</span><span class="social">in</span><span class="social">▶</span><span class="social">t</span></div></div>
       <div><h4>Sumber Harga Emas</h4><div class="source-text">Harga spot emas daripada <a href="https://www.hargaemas.my/" target="_blank" rel="noopener">HargaEmas.my</a></div></div>
     </div>
@@ -289,7 +293,7 @@
   <div class="modal" id="calcModal" role="dialog" aria-modal="true" aria-labelledby="calcTitle"><div class="modal-box"><div class="modal-head"><h2 id="calcTitle">Kalkulator Emas</h2><button class="close" id="closeCalc" aria-label="Tutup">×</button></div><div class="field"><label for="weight">Berat emas (gram)</label><input id="weight" inputmode="decimal" type="number" min="0" step="0.01" value="1"></div><div class="field"><label for="purity">Ketulenan</label><select id="purity"><option value="999 / 24K">999 / 24K</option><option value="916 / 22K">916 / 22K</option></select></div><div class="calc-result" id="calcResult">RM --.--</div></div></div>
   <div class="toast" id="toast" role="status"></div>
   <script>
-    const state = { price999: 0, price916: 0, fetching: false, lastChecked: 0, refreshTimer: null };
+    const state = { price999: 0, price916: 0, chartPoints: [], chartUpdatedAt: null, chartGeometry: null, fetching: false, lastChecked: 0, refreshTimer: null };
     const $ = (id) => document.getElementById(id);
     const money = (n) => `RM ${Number(n).toLocaleString('ms-MY',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
 
@@ -297,6 +301,8 @@
       { url: './api/gold-price', name: 'server Emastracker' },
       { url: 'https://www.hargaemas.my/api/gold-prices.json', name: 'hargaemas.my API' }
     ];
+
+    const CHART_HISTORY_URL = 'https://raw.githubusercontent.com/dwwdx/emxs-haxi-ini-xde-redxzawex/chart-data/gold-history.json';
 
     function positiveNumber(value){const n=Number(value);return Number.isFinite(n)&&n>0;}
     function validPriceData(data){const p=data?.prices;return positiveNumber(p?.spotSellRmPerKg)&&positiveNumber(p?.spotBuyRmPerKg);}
@@ -380,6 +386,60 @@
     }
     function scheduleRefresh(delay){clearTimeout(state.refreshTimer);state.refreshTimer=setTimeout(()=>fetchGoldPrice(false),delay);}
 
+    async function fetchChartHistory(){
+      const status=$('chartStatus');
+      try{
+        const response=await fetch(CHART_HISTORY_URL+'?v='+Date.now(),{headers:{'Accept':'application/json'},cache:'no-store'});
+        if(!response.ok)throw new Error('History HTTP '+response.status);
+        const history=await response.json();
+        const points=Array.isArray(history.points)?history.points.map(point=>({time:typeof point.time==='number'?point.time:Date.parse(point.time),value:Number(point.value)})).filter(point=>Number.isFinite(point.time)&&Number.isFinite(point.value)).sort((a,b)=>a.time-b.time):[];
+        state.chartPoints=points.slice(-2016);
+        state.chartUpdatedAt=Date.parse(history.updatedAt)||state.chartPoints.at(-1)?.time||null;
+        if(status&&state.chartUpdatedAt){const updated=new Intl.DateTimeFormat('ms-MY',{hour:'numeric',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(state.chartUpdatedAt));status.textContent='Data bersama dikemas kini '+updated;}
+        drawChart();
+      }catch(error){
+        if(status)status.textContent=state.chartPoints.length?'Sambungan terganggu; data terakhir dipaparkan':'Belum ada data sejarah bersama';
+        drawChart();
+        console.warn('Shared chart history unavailable',error);
+      }
+    }
+    function drawChart(){
+      const canvas=$('goldChart');if(!canvas)return;
+      const box=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),w=box.width,h=box.height;
+      if(!w||!h)return;
+      canvas.width=Math.max(1,Math.round(w*dpr));canvas.height=Math.max(1,Math.round(h*dpr));
+      const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+      const pad={l:44,r:10,t:15,b:23},all=state.chartPoints;
+      const trend=$('chartTrend');
+      if(!all.length){state.chartGeometry=null;if(trend)trend.textContent='Mengumpul data...';ctx.fillStyle='#8b929b';ctx.font="10px 'DM Sans'";ctx.fillText('Mengumpul sejarah harga bersama...',pad.l,Math.max(20,h/2));return;}
+      const end=state.chartUpdatedAt||all[all.length-1].time,start=Math.max(all[0].time,end-24*60*60*1000);
+      const visible=all.filter(point=>point.time>=start&&point.time<=end);if(!visible.length)visible.push(all[all.length-1]);
+      const values=visible.map(point=>point.value),rawMin=Math.min(...values),rawMax=Math.max(...values),spread=Math.max(rawMax-rawMin,Math.abs(rawMax)*.002,.5),min=rawMin-spread*.25,max=rawMax+spread*.25;
+      const plotW=Math.max(1,w-pad.l-pad.r),plotH=Math.max(1,h-pad.t-pad.b),timeSpan=Math.max(1,end-start);
+      const points=visible.map((point,index)=>({x:visible.length===1?pad.l+plotW/2:pad.l+(point.time-start)/timeSpan*plotW,y:pad.t+(max-point.value)/(max-min)*plotH,value:point.value,time:point.time}));
+      state.chartGeometry={points,width:w,height:h};
+      const first=points[0].value,last=points[points.length-1].value,delta=last-first,percent=first?delta/first*100:0;
+      const signedMoney=value=>(value>0?'+':value<0?'-':'')+'RM '+Math.abs(value).toFixed(2),signedPercent=value=>(value>0?'+':value<0?'-':'')+Math.abs(value).toFixed(2)+'%';
+      if(trend)trend.textContent=points.length<2?'Mengumpul data...':(delta>0?'Naik ':delta<0?'Turun ':'Stabil ')+signedMoney(delta)+' ('+signedPercent(percent)+')';
+      ctx.font="8px 'DM Sans'";ctx.textBaseline='middle';ctx.textAlign='right';
+      for(let i=0;i<3;i++){const y=pad.t+i*plotH/2,value=max-i*(max-min)/2;ctx.strokeStyle='#ece6da';ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#8b929b';ctx.fillText('RM'+value.toFixed(2),pad.l-6,y);}
+      ctx.beginPath();ctx.moveTo(points[0].x,points[0].y);for(let i=1;i<points.length;i++)ctx.lineTo(points[i].x,points[i].y);
+      if(points.length===1){ctx.setLineDash([4,4]);ctx.lineTo(w-pad.r,points[0].y);ctx.strokeStyle='#bb8017';ctx.lineWidth=2;ctx.stroke();ctx.setLineDash([]);}else{ctx.strokeStyle=last>first?'#2d9669':last<first?'#c46b42':'#bb8017';ctx.lineWidth=2.4;ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();}
+      const latest=points[points.length-1];ctx.beginPath();ctx.arc(latest.x,latest.y,4,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=last>first?'#2d9669':last<first?'#c46b42':'#bb8017';ctx.stroke();
+      const formatTime=time=>new Intl.DateTimeFormat('ms-MY',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(time));
+      ctx.fillStyle='#8b929b';ctx.font="8px 'DM Sans'";ctx.textBaseline='bottom';ctx.textAlign='left';ctx.fillText(formatTime(points[0].time),pad.l,h);ctx.textAlign='right';ctx.fillText(formatTime(latest.time),w-pad.r,h);
+      ctx.fillStyle='#b47b13';ctx.font="800 9px 'Manrope'";ctx.textAlign='right';ctx.textBaseline='top';ctx.fillText(money(latest.value),w-pad.r,pad.t+2);
+    }
+    function showChartTooltip(event){
+      const geometry=state.chartGeometry,canvas=$('goldChart'),tooltip=$('chartTooltip');if(!geometry||!canvas||!tooltip||!Number.isFinite(event.clientX))return;
+      const rect=canvas.getBoundingClientRect(),wrap=canvas.parentElement,x=Math.max(0,Math.min(geometry.width,event.clientX-rect.left));let nearest=geometry.points[0],distance=Math.abs(nearest.x-x);
+      for(const point of geometry.points){const next=Math.abs(point.x-x);if(next<distance){nearest=point;distance=next;}}
+      const stamp=new Intl.DateTimeFormat('ms-MY',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kuala_Lumpur'}).format(new Date(nearest.time));
+      tooltip.textContent=stamp+' - '+money(nearest.value)+'/g';tooltip.hidden=false;tooltip.style.left='0px';tooltip.style.top='0px';
+      const left=Math.max(8,Math.min(Math.max(8,wrap.clientWidth-tooltip.offsetWidth-8),nearest.x-tooltip.offsetWidth/2)),top=Math.max(4,nearest.y-tooltip.offsetHeight-10);tooltip.style.left=left+'px';tooltip.style.top=top+'px';
+    }
+    function hideChartTooltip(){const tooltip=$('chartTooltip');if(tooltip)tooltip.hidden=true;}
+
 function updateCalculator(){
       const weight=Math.max(0,Number($('weight').value)||0),is916=$('purity').value.includes('916');
       const rate=is916?state.price916:state.price999;
@@ -392,10 +452,12 @@ function updateCalculator(){
     $('calcModal').addEventListener('click',e=>{if(e.target===$('calcModal'))toggleCalc(false)});$('weight').addEventListener('input',updateCalculator);$('purity').addEventListener('change',updateCalculator);
     $('menuBtn').addEventListener('click',()=>$('navLinks').classList.toggle('open'));document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>$('navLinks').classList.remove('open')));
     $('searchBtn').addEventListener('click',()=>{$('searchPanel').classList.add('open');setTimeout(()=>$('searchInput').focus(),250)});$('closeSearch').addEventListener('click',()=>$('searchPanel').classList.remove('open'));
-    $('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.toLowerCase();const id=q.includes('artikel')||q.includes('berita')?'artikel':q.includes('produk')?'produk':q.includes('kalkulator')?'panduan':'harga';document.getElementById(id).scrollIntoView({behavior:'smooth'});$('searchPanel').classList.remove('open');}});
+    $('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.toLowerCase();const id=q.includes('artikel')||q.includes('berita')?'artikel':q.includes('produk')?'produk':q.includes('kalkulator')?'panduan':q.includes('carta')?'carta':'harga';document.getElementById(id).scrollIntoView({behavior:'smooth'});$('searchPanel').classList.remove('open');}});
     $('refreshPrice').addEventListener('click',()=>fetchGoldPrice(true));
-    window.addEventListener('online',()=>fetchGoldPrice(true));document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-state.lastChecked>120000)fetchGoldPrice(false)});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
+    const chartCanvas=$('goldChart');chartCanvas.addEventListener('pointermove',showChartTooltip);chartCanvas.addEventListener('pointerdown',showChartTooltip);chartCanvas.addEventListener('pointerleave',hideChartTooltip);chartCanvas.addEventListener('pointercancel',hideChartTooltip);
+    window.addEventListener('resize',drawChart);window.addEventListener('online',()=>{fetchGoldPrice(true);fetchChartHistory()});document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(Date.now()-state.lastChecked>120000)fetchGoldPrice(false);fetchChartHistory()}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){toggleCalc(false);$('searchPanel').classList.remove('open')}});
     restoreSavedPrice();
+    fetchChartHistory();setInterval(fetchChartHistory,5*60*1000);
     fetchGoldPrice();
   </script>
   <script>
